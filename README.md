@@ -1,4 +1,4 @@
-[info] (docs/ CoronelA00365049.pdf)
+[info] (Coronel A00365049.pdf)
 
 <h1 align="center">Hi 👋, I'm Alejandro Coronel Sanchez</h1>
 <h3 align="center">The project is about an anime manager, where the main objective is basically manage a list of watched and currently-watching anime, not only anime but also light novel and manga. Additionally it also has a quizz game where you can create and play quizzes where the main topic are anime works</h3>
