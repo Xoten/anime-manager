@@ -7,17 +7,24 @@ public class Comic {
 	private String author;
 	private String genres;
 	private String image;
+	private String name;
 	
-	public Comic(int c, int v, String a,String g, String i) {
+	public Comic( String n, int c, int v, String a,String g, String i) {
 		
 	chapters = c;
 	volumes = v;
 	author = a;
 	genres = g;
 	image = i;
+	name = n;
 		
 		
 		
+	}
+	
+	public String getName() {
+		
+		return name;
 	}
 	
 	

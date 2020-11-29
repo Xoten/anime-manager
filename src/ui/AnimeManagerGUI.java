@@ -2,8 +2,7 @@ package ui;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-import exceptions.PasswordNotEqualsException;
+import exceptions.NotTheSamePasswordException;
 import model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,9 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.ImageView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -71,18 +68,18 @@ public class AnimeManagerGUI {
 	@FXML
 	public void login(ActionEvent event) throws IOException {
 
-		User userToLogin = am.binarySearchUser(txtnickname.getText());
+		User userToLogin = am.searchUser(txtnickname.getText());
 	
 		if(userToLogin!=null) {
 			if(userToLogin.getPassword().equals(txtpassword.getText())) {
 				
-					loginUser();
+					toLogin();
 				
 			}else {
-				userPasswordIncorrectAlert();
+				toShowIncorrectPasswordAlert();
 			}
 		}else {
-			userDoesNotExistAlert();
+			toShowUnexistingUserAlert();
 		}
 	}
 	
@@ -109,15 +106,15 @@ public class AnimeManagerGUI {
 			String passwordVerify = txtPasswordVerificationRegister.getText();
 			String username = txtNicknameRegister.getText();
 			String pathPicture = txtPathPictureRegister.getText();
-			am.newUser(username, passwordVerify,pathPicture );
-			am.verificationPasswords(password, passwordVerify);
-			cleanFieldsRegister();
-			clientAddedAlert(username, 1);
+			am.toAddNewUser(username, passwordVerify,pathPicture );
+			am.toVerifyPassword(password, passwordVerify);
+			toCleanRegister();
+			newUserAlert(username, 1);
 			loadLogin();
 
-		}catch(PasswordNotEqualsException pnee) {
-			cleanFieldsRegister();
-			incorrectPasswordAlert();
+		}catch(NotTheSamePasswordException pnee) {
+			toCleanRegister();
+			toShowInvalidPasswordAlert();
 		}
 	}
 	@FXML
@@ -134,21 +131,17 @@ public class AnimeManagerGUI {
 	}
 
 
-	public void clientAddedAlert(String username, int type) {
-		cleanFieldsRegister();
+	public void newUserAlert(String username, int type) {
+		toCleanRegister();
 
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setHeaderText("Cliente agregado correctamente");
-		if(type == 0) {
-			alert.setContentText("El cliente se ha guardado como comprador con el nombre de usuario: " + username);
-		}else {
-			alert.setContentText("El cliente se ha guardado como vendedor con el nombre de usuario: " + username);
-		}
+		alert.setHeaderText("Usuario agregado correctamente");
+	
 		alert.showAndWait();
 	}
 
 
-	public void cleanFieldsRegister() {
+	public void toCleanRegister() {
 		txtPasswordRegister.setText("");
 		txtPasswordVerificationRegister.setText("");
 		txtNicknameRegister.setText("");
@@ -158,7 +151,7 @@ public class AnimeManagerGUI {
 
 
 
-	public void loginUser() throws IOException {
+	public void toLogin() throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
 
 		fxmlLoader.setController(this);
@@ -171,8 +164,8 @@ public class AnimeManagerGUI {
 		
 	}
 
-	public void userPasswordIncorrectAlert(){
-		cleanFieldsLogin();
+	public void toShowIncorrectPasswordAlert(){
+		toCleanLogin();
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setHeaderText("Contraseña incorrecta");
@@ -180,20 +173,20 @@ public class AnimeManagerGUI {
 		alert.showAndWait();
 	}
 
-	public void userDoesNotExistAlert(){
-		cleanFieldsLogin();
+	public void toShowUnexistingUserAlert(){
+		toCleanLogin();
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setHeaderText("Cliente no existente");
 		alert.setContentText("El cliente no se encuentra en nuestros datos, por favor verifique su nombre de usuario");
 		alert.showAndWait();
 	}
-	public void cleanFieldsLogin() {
+	public void toCleanLogin() {
 		txtnickname.setText("");
 		txtpassword.setText("");
 	}
 
-	public void incorrectPasswordAlert() {
+	public void toShowInvalidPasswordAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setHeaderText("Contraseñas incorrectas");
 		alert.setContentText("Las contraseñas que ingreson no son iguales");

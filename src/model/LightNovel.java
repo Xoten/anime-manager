@@ -6,10 +6,10 @@ public class LightNovel  extends Book{
 	private String adaptationN;
 
 
-	public LightNovel(int c, int v, String a, String g, String i, boolean hA, String ad) {
-		super(c, v, a, g, i);
+	public LightNovel(String n, int c, int v, String a, String g, String i, String ad) {
+		super(n,c, v, a, g, i);
 
-		adaptation = hA;
+		
 		adaptationN = ad;
 
 	}

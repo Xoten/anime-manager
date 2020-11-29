@@ -2,23 +2,24 @@ package model;
 
 public class Anime {
 
-
+    private String name;
 	private String picture;
 	private String studios;
 	private int score;
 	private String type;
 	private String genres;
 	private int episodes;
-	private int currentep;
+	
 
 
-	public Anime(String p, String st, int s, String t, String g, int ep) {
-		p = picture;
-		st = studios;
-		s = score;
-		t = type;
-		g = genres;
-		ep = episodes;
+	public Anime(String n,String p, String st, int s, String t, String g, int ep) {
+		 picture = p;
+		 studios = st;
+		 score = s;
+		 type = t;
+		 genres = g;
+		episodes = ep;
+		name = n;
 
 
 	}
@@ -58,12 +59,8 @@ public class Anime {
 	public void setEpisodes(int episodes) {
 		this.episodes = episodes;
 	}
+	public String getName() {
+		return name;
+	}
 	
-	public int getCurrentep() {
-		return currentep;
-	}
-	public void setCurrentep(int currentep) {
-		this.currentep = currentep;
-	}
 }
-

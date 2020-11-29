@@ -8,10 +8,10 @@ public class Manga extends Comic {
 
 	private String animeAdaptationN;
 
-	public Manga(int c, int v, String a, String g, String i, boolean aA, String aan) {
-		super(c, v, a, g, i);
+	public Manga(String n,int c, int v, String a, String g, String i, String aan) {
+		super(n,c, v, a, g, i);
 		
-		animeAdaptation = aA;
+		
 		animeAdaptationN = aan;
 	}
 	
