@@ -22,13 +22,14 @@ public class Quizz {
 	
 	 public void addQuestion(String s) {
 		 
+		 questions.add(s);
 		 
 		 
 	 }
 	 
 	 public void addAnswer(String a) {
 		 
-		 
+		 answers.add(a);
 		 
 	 }
 

@@ -14,7 +14,9 @@ public class AnimeManager {
 	private ArrayList<Comic> mangas;
 	private ArrayList<Comic>  manhwas;
 	private ArrayList<Book> lnovels;
+	private ArrayList<Quizz> quizzes;
 
+	
 	public AnimeManager() {
 
 		users = new LinkedList<>();
@@ -22,6 +24,7 @@ public class AnimeManager {
 		mangas = new ArrayList<>();
 		manhwas = new ArrayList<>();
 		lnovels = new ArrayList<>();
+		quizzes = new ArrayList<>();
 	}
 	
 	public void addAnime() {
@@ -90,6 +93,19 @@ public class AnimeManager {
 	public ArrayList<Book> getLnovels() {
 		return lnovels;
 	}
+	
+	public void addQuizz(int t, String d) {
+		
+		Quizz q = new Quizz(t,d);
+		
+		quizzes.add(q);
+		
+	}
+	
+	public ArrayList<Quizz> getQuizzes() {
+		return quizzes;
+	}
+
 
 
 
