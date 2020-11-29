@@ -118,7 +118,7 @@ public class AnimeManagerGUI {
 		}
 	}
 	@FXML
-	public void browsePathPictureProfile(ActionEvent event) {
+	public void searchPicture(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Buscar imagen");
 

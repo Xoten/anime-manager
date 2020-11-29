@@ -18,7 +18,7 @@
       <Label layoutX="187.0" layoutY="232.0" text="Foto de Perfil" />
       <TextField fx:id="txtPathPictureRegister" layoutX="274.0" layoutY="228.0" />
       <ToggleButton layoutX="-142.0" layoutY="25.0" mnemonicParsing="false" text="ToggleButton" />
-      <Button layoutX="433.0" layoutY="228.0" mnemonicParsing="false" onAction="#browsePathPictureProfile" text="Search" />
+      <Button layoutX="433.0" layoutY="228.0" mnemonicParsing="false" onAction="#searchPicture" text="Search" />
       <Button layoutX="274.0" layoutY="271.0" mnemonicParsing="false" onAction="#addUser" text="Add User" />
    </children>
 </Pane>
