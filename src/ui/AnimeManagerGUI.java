@@ -122,7 +122,7 @@ public class AnimeManagerGUI {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Buscar imagen");
 
-		File theDirectory = new File("data/picturesPeople");
+		File theDirectory = new File("data/animePics");
 
 		fileChooser.setInitialDirectory(theDirectory);
 
@@ -177,8 +177,8 @@ public class AnimeManagerGUI {
 		toCleanLogin();
 
 		Alert alert = new Alert(AlertType.ERROR);
-		alert.setHeaderText("Cliente no existente");
-		alert.setContentText("El cliente no se encuentra en nuestros datos, por favor verifique su nombre de usuario");
+		alert.setHeaderText("usuario no existente");
+		alert.setContentText("El usuaruio no se encuentra en registrado, por favor verifique su nickname");
 		alert.showAndWait();
 	}
 	public void toCleanLogin() {
