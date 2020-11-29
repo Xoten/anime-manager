@@ -9,20 +9,27 @@ public class User {
 	private int totalLnovelw;
 	private String nickname;
 	private String password;
+	private String photo;
 	
 	
 	
-	public User(int q, int r, int totala, int totalm, int totalL, String n, String p) {
+	public User( String n, String p, String ph) {
 		
-		quizzes = q;
-		rank = r;
-		totalanimesw = totala;
-		totalmangaw = totalm;
-		totalLnovelw = totalL;
+		quizzes = 0;
+		rank = 0;
+		totalanimesw = 0;
+		totalmangaw = 0;
+		totalLnovelw = 0;
 		nickname = n;
 		password = p;
+		photo = ph;
 		
 		
+	}
+	
+	public String getPhoto() {
+		
+		return photo;
 	}
 	public int getQuizzes() {
 		return quizzes;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#addUser" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="209.0" layoutY="148.0" text="Nickname" />
+      <TextField fx:id="txtNicknameRegister" layoutX="274.0" layoutY="144.0" />
+      <Label layoutX="210.0" layoutY="176.0" text="Password" />
+      <TextField fx:id="txtPasswordRegister" layoutX="274.0" layoutY="172.0" />
+      <TextField fx:id="txtPasswordVerificationRegister" layoutX="274.0" layoutY="200.0" />
+      <Label layoutX="162.0" layoutY="204.0" text="Confirm Password" />
+      <Label layoutX="187.0" layoutY="232.0" text="Foto de Perfil" />
+      <TextField fx:id="txtPathPictureRegister" layoutX="274.0" layoutY="228.0" />
+      <ToggleButton layoutX="-142.0" layoutY="25.0" mnemonicParsing="false" text="ToggleButton" />
+      <Button layoutX="433.0" layoutY="228.0" mnemonicParsing="false" onAction="#browsePathPictureProfile" text="Search" />
+      <Button layoutX="274.0" layoutY="271.0" mnemonicParsing="false" onAction="#addUser" text="Add User" />
+   </children>
+</Pane>

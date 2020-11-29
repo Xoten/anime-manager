@@ -8,12 +8,12 @@ import javafx.stage.Stage;
 import model.AnimeManager;
 
 public class Main extends Application{
-	private InitialInterfaceGUI initialInterfaceGUI;
+	private AnimeManagerGUI initialInterfaceGUI;
 	private AnimeManager animeManager;
 	
 	public Main() {
 		animeManager = new AnimeManager();
-		initialInterfaceGUI = new InitialInterfaceGUI(animeManager);
+		initialInterfaceGUI = new AnimeManagerGUI(animeManager);
 	}
 	
 	public static void main(String[] args) {
@@ -27,10 +27,11 @@ public class Main extends Application{
 		fxmlLoader.setController(initialInterfaceGUI);
 		
 		Parent root = fxmlLoader.load();
+		initialInterfaceGUI.loadLogin();
 		
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Contact Manager");
+		primaryStage.setTitle("Anime Manager");
 		primaryStage.show();
 	}
 	
