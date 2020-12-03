@@ -47,6 +47,33 @@ public class AnimeManagerGUI {
 	@FXML
     private AnchorPane menuPane;
 
+    @FXML
+    private AnchorPane anchPane;
+    @FXML
+    private TextField searchanimetxt;
+
+    @FXML
+    private Label searchedAnime;
+
+    @FXML
+    private Label animetype;
+
+    @FXML
+    private Label currentEp;
+
+    @FXML
+    private Label currentScore;
+
+    @FXML
+    private Label totalEp;
+
+    @FXML
+    private TextField modifycurrentscoretxt;
+
+    @FXML
+    private TextField modifycurrentepanimetxt;
+
+
 
 
 	public AnimeManagerGUI(AnimeManager amg){
@@ -193,8 +220,17 @@ public class AnimeManagerGUI {
 		alert.showAndWait();
 	}
 	@FXML
-    void manageAnimeList(ActionEvent event) {
+    void manageAnimeList(ActionEvent event) throws IOException {
+		
 
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainAnimeOption.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent animeOptionPane = fxmlLoader.load();
+
+		mainPanel.getChildren().clear();
+		mainPanel.setCenter(animeOptionPane);
     }
 
     @FXML
@@ -214,6 +250,33 @@ public class AnimeManagerGUI {
 
     @FXML
     void searchUser(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void showTrackAnimeOp(ActionEvent event) {
+    	
+    	
+    	
+
+    }
+
+    @FXML
+    void showWatchedAnimeOp(ActionEvent event) {
+
+    }
+    @FXML
+    void ShowTrackingAnime(ActionEvent event) {
+
+    }
+
+    @FXML
+    void addAnime(ActionEvent event) {
+
+    }
+
+    @FXML
+    void editAnimeStatus(ActionEvent event) {
 
     }
 
