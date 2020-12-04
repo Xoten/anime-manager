@@ -10,11 +10,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import model.Anime;
 import model.AnimeManager;
 
 public class AnimeManagerGUI {
@@ -40,38 +44,120 @@ public class AnimeManagerGUI {
 	@FXML
 	private TextField txtPathPictureRegister;
 	@FXML
-    private TextField searchusertxt;
+	private TextField searchusertxt;
 	@FXML
-    private Label txtusernick;
+	private Label txtusernick;
 
 	@FXML
-    private AnchorPane menuPane;
+	private AnchorPane menuPane;
 
-    @FXML
-    private AnchorPane anchPane;
-    @FXML
-    private TextField searchanimetxt;
+	@FXML
+	private AnchorPane anchPane;
+	@FXML
+	private TextField searchanimetxt;
 
-    @FXML
-    private Label searchedAnime;
+	@FXML
+	private Label searchedAnime;
 
-    @FXML
-    private Label animetype;
+	@FXML
+	private Label animetype;
 
-    @FXML
-    private Label currentEp;
+	@FXML
+	private Label currentEp;
 
-    @FXML
-    private Label currentScore;
+	@FXML
+	private Label currentScore;
 
-    @FXML
-    private Label totalEp;
+	@FXML
+	private Label totalEp;
 
-    @FXML
-    private TextField modifycurrentscoretxt;
+	@FXML
+	private TextField modifycurrentscoretxt;
 
-    @FXML
-    private TextField modifycurrentepanimetxt;
+	@FXML
+	private TextField modifycurrentepanimetxt;
+
+	@FXML
+	private TableView<Anime> tvTrackingAnime;
+
+	@FXML
+	private TableColumn<Anime, String> tcAnimeName;
+
+	@FXML
+	private TableColumn<Anime, String> tcCurentScore;
+
+	@FXML
+	private TableColumn<Anime,String> tcCurrentEp;
+
+	@FXML
+	private TableColumn<Anime,String> tcTotalEp;
+
+	@FXML
+	private TextField nametxt;
+
+	@FXML
+	private TextField picturetxt;
+
+	@FXML
+	private TextField studiostxt;
+
+	@FXML
+	private TextField genrestxt;
+
+	@FXML
+	private TextField episodestxt;
+
+	@FXML
+	private TextField currenteptxt;
+
+	@FXML
+	private TextField currentseasontxt;
+
+	@FXML
+	private TextField currentscoretxt;
+
+	@FXML
+	private TextField watchedanimenametxt;
+
+	@FXML
+	private TextField watchedanimepicturetxt;
+
+	@FXML
+	private TextField watchedanimestudiostxt;
+
+	@FXML
+	private TextField watchedanimegenrestxt;
+
+	@FXML
+	private TextField watchedanimeeptxt;
+
+	@FXML
+	private TextField watchedanimescoretxt;
+
+	@FXML
+	private Label watchedanimeairtime;
+
+	@FXML
+	private Label watchedanimeseasons;
+
+	@FXML
+	private TextField watchedanimeseasonstxt;
+
+	@FXML
+	private TextField watchedanimeairtimetxt;
+
+	@FXML
+	private Label watchedanimerelease;
+
+	@FXML
+	private TextField watchedanimereleasetxt;
+
+	@FXML
+	private CheckBox movieOp;
+
+	@FXML
+	private CheckBox seriesOp;
+
 
 
 
@@ -96,12 +182,12 @@ public class AnimeManagerGUI {
 	public void login(ActionEvent event) throws IOException {
 
 		User userToLogin = am.searchUser(txtnickname.getText());
-	
+
 		if(userToLogin!=null) {
 			if(userToLogin.getPassword().equals(txtpassword.getText())) {
-				
-					toLogin();
-				
+
+				toLogin();
+
 			}else {
 				toShowIncorrectPasswordAlert();
 			}
@@ -109,7 +195,7 @@ public class AnimeManagerGUI {
 			toShowUnexistingUserAlert();
 		}
 	}
-	
+
 
 	@FXML
 	public void register(ActionEvent event) throws IOException {
@@ -163,7 +249,7 @@ public class AnimeManagerGUI {
 
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setHeaderText("Usuario agregado correctamente");
-	
+
 		alert.showAndWait();
 	}
 
@@ -184,11 +270,11 @@ public class AnimeManagerGUI {
 		fxmlLoader.setController(this);
 
 		Parent userBuyerScreenPane = fxmlLoader.load(); 
-		
+
 
 		mainPanel.getChildren().clear();
 		mainPanel.setCenter(userBuyerScreenPane);
-		
+
 	}
 
 	public void toShowIncorrectPasswordAlert(){
@@ -220,8 +306,8 @@ public class AnimeManagerGUI {
 		alert.showAndWait();
 	}
 	@FXML
-    void manageAnimeList(ActionEvent event) throws IOException {
-		
+	void manageAnimeList(ActionEvent event) throws IOException {
+
 
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainAnimeOption.fxml"));
 
@@ -231,54 +317,213 @@ public class AnimeManagerGUI {
 
 		mainPanel.getChildren().clear();
 		mainPanel.setCenter(animeOptionPane);
-    }
+	}
 
-    @FXML
-    void manageBookList(ActionEvent event) {
+	@FXML
+	void manageBookList(ActionEvent event) {
 
-    }
+	}
 
-    @FXML
-    void manageComicList(ActionEvent event) {
+	@FXML
+	void manageComicList(ActionEvent event) {
 
-    }
+	}
 
-    @FXML
-    void manageQuizzes(ActionEvent event) {
+	@FXML
+	void manageQuizzes(ActionEvent event) {
 
-    }
+	}
 
-    @FXML
-    void searchUser(ActionEvent event) {
+	@FXML
+	void searchUser(ActionEvent event) {
 
-    }
-    
-    @FXML
-    void showTrackAnimeOp(ActionEvent event) {
-    	
-    	
-    	
+	}
 
-    }
+	@FXML
+	void showTrackAnimeOp(ActionEvent event) throws IOException {
 
-    @FXML
-    void showWatchedAnimeOp(ActionEvent event) {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TrackingAnimeOption.fxml"));
 
-    }
-    @FXML
-    void ShowTrackingAnime(ActionEvent event) {
+		fxmlLoader.setController(this);
 
-    }
+		Parent trackingAnimeOp = fxmlLoader.load();
 
-    @FXML
-    void addAnime(ActionEvent event) {
+		mainPanel.getChildren().clear();
+		mainPanel.setCenter(trackingAnimeOp);
 
-    }
 
-    @FXML
-    void editAnimeStatus(ActionEvent event) {
 
-    }
+
+	}
+
+	@FXML
+	void showWatchedAnimeOp(ActionEvent event) throws IOException {
+
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WatchedAnimeOption.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent watchedAnimeOption = fxmlLoader.load();
+
+		mainPanel.getChildren().clear();
+
+
+		mainPanel.setCenter(watchedAnimeOption);
+
+
+
+	}
+	@FXML
+	void ShowTrackingAnime(ActionEvent event) throws IOException {
+
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("showTrackingAnime.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent showTrackingAnimePane = fxmlLoader.load();
+
+		mainPanel.getChildren().clear();
+
+
+		mainPanel.setCenter(showTrackingAnimePane);
+
+	}
+
+	@FXML
+	void addAnime(ActionEvent event) {
+
+
+
+
+
+	}
+
+	@FXML
+	void editAnimeStatus(ActionEvent event) {
+
+	}
+
+
+
+	@FXML
+	void sortByAnimeName(ActionEvent event) {
+
+	}
+
+	@FXML
+	void sortByScore(ActionEvent event) {
+
+	}
+
+	@FXML
+	void sortByTotalEp(ActionEvent event) {
+
+	}
+	@FXML
+	void addAnimetoWatchList(ActionEvent event) {
+
+	}
+
+	@FXML
+	void addWatchedAnimeOp(ActionEvent event) throws IOException {
+
+
+
+
+
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addWatchedAnime.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent toAddwatchedanimeop = fxmlLoader.load();
+
+		mainPanel.getChildren().clear();
+
+		watchedanimeairtime.setVisible(false);
+
+		watchedanimeseasons.setVisible(false);
+
+		watchedanimeseasonstxt.setVisible(false);
+
+		watchedanimeairtimetxt.setVisible(false);
+
+		watchedanimerelease.setVisible(false);
+
+		watchedanimereleasetxt.setVisible(false);
+
+
+		mainPanel.setCenter(toAddwatchedanimeop);
+
+
+	}
+
+	@FXML
+	void showWatchedAnimeList(ActionEvent event) {
+
+	}
+
+	@FXML
+	void addIfSeries(ActionEvent event) {
+
+
+
+		if(seriesOp.isSelected() == true) {
+			
+			movieOp.setDisable(true);
+			watchedanimeairtime.setVisible(true);
+
+			watchedanimeseasons.setVisible(true);
+
+			watchedanimeseasonstxt.setVisible(true);
+
+			watchedanimeairtimetxt.setVisible(true);
+		}else {
+			
+			movieOp.setDisable(false);
+
+			watchedanimeairtime.setVisible(false);
+
+			watchedanimeseasons.setVisible(false);
+
+			watchedanimeseasonstxt.setVisible(false);
+
+			watchedanimeairtimetxt.setVisible(false);
+
+
+		}
+
+	}
+
+	@FXML
+	void addWatchedAnime(ActionEvent event) {
+
+	}
+
+	@FXML
+	void addifMovie(ActionEvent event) {
+
+
+		if(movieOp.isSelected() == true) {
+			seriesOp.setDisable(true);
+			watchedanimerelease.setVisible(true);
+
+			watchedanimereleasetxt.setVisible(true);
+		}else {
+			seriesOp.setDisable(false);
+
+			watchedanimerelease.setVisible(false);
+
+			watchedanimereleasetxt.setVisible(false);
+
+
+		}
+
+
+	}
+
+
+
+
 
 
 }
