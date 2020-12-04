@@ -184,6 +184,16 @@ public class AnimeManagerGUI {
 	private TableColumn<?, ?> TcSWAStudios;
 	@FXML
 	private TableView<?> tcReadedComic;
+	@FXML
+	private Label comicanimeadapt;
+	@FXML
+	private CheckBox mangaOp;
+
+	@FXML
+	private CheckBox manhwaOp;
+
+	@FXML
+	private Label comiccolorized;
 
 	@FXML
 	private TableColumn<?, ?> tcReadedComicName;
@@ -606,6 +616,12 @@ public class AnimeManagerGUI {
 
 	}
 
+
+	@FXML
+	void searchAnime(ActionEvent event) {
+
+	}
+
 	@FXML
 	void editAnimeStatus(ActionEvent event) throws IOException {
 
@@ -630,6 +646,8 @@ public class AnimeManagerGUI {
 	void saveCurrentScore(ActionEvent event) {
 
 	}
+
+
 
 
 	@FXML
@@ -741,7 +759,6 @@ public class AnimeManagerGUI {
 	@FXML
 	void addifMovie(ActionEvent event) {
 
-
 		if(movieOp.isSelected() == true) {
 			seriesOp.setDisable(true);
 			watchedanimerelease.setVisible(true);
@@ -753,10 +770,7 @@ public class AnimeManagerGUI {
 			watchedanimerelease.setVisible(false);
 
 			watchedanimereleasetxt.setVisible(false);
-
-
 		}
-
 
 	}
 
@@ -798,17 +812,46 @@ public class AnimeManagerGUI {
 	@FXML
 	void AddToReadListIfManhwa(ActionEvent event) {
 
+		if(manhwaOp.isSelected() == true) {
+			mangaOp.setDisable(true);
+			comiccolorized.setVisible(true);
+
+			comicColorizedtxt.setVisible(true);
+
+		}else {
+			mangaOp.setDisable(false);
+
+			comiccolorized.setVisible(false);
+
+			comicColorizedtxt.setVisible(false);
+		}
 	}
 
 	@FXML
 	void addToReadListIfManga(ActionEvent event) {
+
+		if(mangaOp.isSelected() == true) {
+			manhwaOp.setDisable(true);
+			comicanimeadapt.setVisible(true);
+			comicAdaptxtxt.setVisible(true);
+
+		}else {
+			manhwaOp.setDisable(false);
+
+			comicanimeadapt.setVisible(false);
+			comicAdaptxtxt.setVisible(false);
+		}
+	}
+
+	@FXML
+	void searchComic(ActionEvent event) {
 
 	}
 
 
 	@FXML
 	void editComicStatusOption(ActionEvent event) throws IOException {
-		
+
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("editComicStatus.fxml"));
 
 		fxmlLoader.setController(this);
@@ -821,8 +864,24 @@ public class AnimeManagerGUI {
 	}
 
 	@FXML
+	void saveCurrComicVol(ActionEvent event) {
+
+	}
+
+	@FXML
+	void saveCurrentComicScore(ActionEvent event) {
+
+	}
+	@FXML
+	void saveCurrComicChap(ActionEvent event) {
+
+	}
+
+
+
+	@FXML
 	void showFollowedComics(ActionEvent event) throws IOException {
-		
+
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("showTrackingComic.fxml"));
 
 		fxmlLoader.setController(this);
@@ -836,7 +895,7 @@ public class AnimeManagerGUI {
 
 	@FXML
 	void showReadedComicOp(ActionEvent event) throws IOException {
-		
+
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ReadedComicOption.fxml"));
 
 		fxmlLoader.setController(this);
@@ -864,69 +923,114 @@ public class AnimeManagerGUI {
 
 	@FXML
 	void addComicToFollowOp(ActionEvent event) throws IOException {
-      
+
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addComicToReadList.fxml"));
 
 		fxmlLoader.setController(this);
 
 		Parent addComicToReadListScreen = fxmlLoader.load();
 
+		comiccolorized.setVisible(false);
+		comicColorizedtxt.setVisible(false);
+		comicanimeadapt.setVisible(false);
+		comicAdaptxtxt.setVisible(false);
+
 
 		mainPanel.setCenter(addComicToReadListScreen);
-		
-		
+
+
 	}
-	
+
 	@FXML
-    void addReadedComicOp(ActionEvent event) throws IOException {
-		
+	void addReadedComicOp(ActionEvent event) throws IOException {
+
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addReadedComic.fxml"));
 
 		fxmlLoader.setController(this);
 
 		Parent addReadedComicScreen = fxmlLoader.load();
-		
+
 		ReadedComicColorized.setVisible(false);
 
-	    readedcomiccolorizedtxt.setVisible(false);
+		readedcomiccolorizedtxt.setVisible(false);
 
-	     readedComicAdap.setVisible(false);
+		readedComicAdap.setVisible(false);
 
-	     readedcomicanimeadaptxt.setVisible(false);
+		readedcomicanimeadaptxt.setVisible(false);
 
 
 		mainPanel.setCenter(addReadedComicScreen);
-		
-		
 
-    }
 
-    @FXML
-    void showComics(ActionEvent event) {
 
-    }
+	}
+
+	@FXML
+	void showComics(ActionEvent event) throws IOException {
+
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("showReadedComic.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent showReadedComicScreen = fxmlLoader.load();
+
+
+		mainPanel.setCenter(showReadedComicScreen);
+
+	}
 
 
 	@FXML
 	void addIfManga2(ActionEvent event) {
-		
-		
-		      mangaop2
 
-		     manhwaop2
 
-		   ReadedComicColorized;
+		if(mangaop2.isSelected() == true) {
 
-		    readedcomiccolorizedtxt;
+			manhwaop2.setDisable(true);
 
-		     readedComicAdap;
+			ReadedComicColorized.setVisible(false);
 
-		     readedcomicanimeadaptxt;
+			readedcomiccolorizedtxt.setVisible(false);
+
+			readedComicAdap.setVisible(true);
+
+			readedcomicanimeadaptxt.setVisible(true);
+
+
+		}else {
+			manhwaop2.setDisable(false);
+
+			readedComicAdap.setVisible(false);
+
+			readedcomicanimeadaptxt.setVisible(false);
+
+
+
+		}
+
 
 	}
 
 	@FXML
 	void addIfManhwa2(ActionEvent event) {
+
+		if(manhwaop2.isSelected() == true) {
+
+			mangaop2.setDisable(true);
+
+			ReadedComicColorized.setVisible(true);
+
+			readedcomiccolorizedtxt.setVisible(true);
+
+
+		}else {
+			mangaop2.setDisable(false);
+
+			ReadedComicColorized.setVisible(false);
+
+			readedcomiccolorizedtxt.setVisible(false);
+
+		}
 
 	}
 
