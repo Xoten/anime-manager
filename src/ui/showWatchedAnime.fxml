@@ -20,7 +20,6 @@
               </columns>
             </TableView>
             <CheckBox layoutX="494.0" layoutY="75.0" mnemonicParsing="false" onAction="#sortWatchedAnimebyName" text="Nombre" />
-            <CheckBox layoutX="496.0" layoutY="102.0" mnemonicParsing="false" onAction="#sortWatchedAnimeByType" text="Type" />
             <CheckBox layoutX="496.0" layoutY="135.0" mnemonicParsing="false" onAction="#SortWatchedAnimebyScore" text="Score" />
             <Label layoutX="457.0" layoutY="39.0" prefHeight="17.0" prefWidth="133.0" text="Filltros de Ordenamiento" />
          </children>

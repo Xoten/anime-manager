@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -22,12 +23,15 @@ import model.Anime;
 import model.AnimeManager;
 
 public class AnimeManagerGUI {
-	
-	
+
+
 
 	AnimeManager am;
-	
-	
+	@FXML
+	private Button returnButton;
+
+	@FXML
+	private AnchorPane mainMenuPane;
 	@FXML
 	private BorderPane mainPanel;
 	@FXML
@@ -299,46 +303,46 @@ public class AnimeManagerGUI {
 
 	@FXML
 	private TextField modifyCurrComicVoltxt;
-    @FXML
-    private TextField searchComictxt;
-    @FXML
-    private TextField ReadedComictxt;
+	@FXML
+	private TextField searchComictxt;
+	@FXML
+	private TextField ReadedComictxt;
 
-    @FXML
-    private TextField readedcomicpicturetxt;
+	@FXML
+	private TextField readedcomicpicturetxt;
 
-    @FXML
-    private TextField readedcomicauthortxt;
+	@FXML
+	private TextField readedcomicauthortxt;
 
-    @FXML
-    private TextField readedcomicgenretxt;
+	@FXML
+	private TextField readedcomicgenretxt;
 
-    @FXML
-    private TextField readedcomicchapterstxt;
+	@FXML
+	private TextField readedcomicchapterstxt;
 
-    @FXML
-    private TextField readedcomicscoretxt;
+	@FXML
+	private TextField readedcomicscoretxt;
 
-    @FXML
-    private CheckBox mangaop2;
+	@FXML
+	private CheckBox mangaop2;
 
-    @FXML
-    private CheckBox manhwaop2;
+	@FXML
+	private CheckBox manhwaop2;
 
-    @FXML
-    private Label ReadedComicColorized;
+	@FXML
+	private Label ReadedComicColorized;
 
-    @FXML
-    private TextField readedcomiccolorizedtxt;
+	@FXML
+	private TextField readedcomiccolorizedtxt;
 
-    @FXML
-    private Label readedComicAdap;
+	@FXML
+	private Label readedComicAdap;
 
-    @FXML
-    private TextField readedcomicanimeadaptxt;
+	@FXML
+	private TextField readedcomicanimeadaptxt;
 
-    @FXML
-    private TextField readedcomicvolumestxt;
+	@FXML
+	private TextField readedcomicvolumestxt;
 
 
 
@@ -362,6 +366,7 @@ public class AnimeManagerGUI {
 
 		mainPanel.getChildren().clear();
 		mainPanel.setCenter(loginPane);
+
 	}
 	@FXML
 	public void login(ActionEvent event) throws IOException {
@@ -458,7 +463,11 @@ public class AnimeManagerGUI {
 
 
 		mainPanel.getChildren().clear();
+		returnButton.setVisible(false);
+		mainPanel.setTop(mainMenuPane);
 		mainPanel.setCenter(userBuyerScreenPane);
+
+
 
 	}
 
@@ -490,6 +499,13 @@ public class AnimeManagerGUI {
 		alert.setContentText("Las contraseñas que ingreson no son iguales");
 		alert.showAndWait();
 	}
+
+
+	@FXML
+	void returnToMainMenu(ActionEvent event) throws IOException {
+
+		toLogin();
+	}
 	@FXML
 
 	//Anime Section
@@ -502,8 +518,8 @@ public class AnimeManagerGUI {
 		fxmlLoader.setController(this);
 
 		Parent animeOptionPane = fxmlLoader.load();
+		returnButton.setVisible(true);
 
-		mainPanel.getChildren().clear();
 		mainPanel.setCenter(animeOptionPane);
 	}
 
@@ -513,11 +529,12 @@ public class AnimeManagerGUI {
 
 	@FXML
 	void manageQuizzes(ActionEvent event) {
-
+		returnButton.setVisible(true);
 	}
 
 	@FXML
 	void searchUser(ActionEvent event) {
+		returnButton.setVisible(true);
 
 	}
 
@@ -530,7 +547,7 @@ public class AnimeManagerGUI {
 
 		Parent trackingAnimeOp = fxmlLoader.load();
 
-		mainPanel.getChildren().clear();
+
 		mainPanel.setCenter(trackingAnimeOp);
 
 
@@ -547,7 +564,7 @@ public class AnimeManagerGUI {
 
 		Parent watchedAnimeOption = fxmlLoader.load();
 
-		mainPanel.getChildren().clear();
+
 
 
 		mainPanel.setCenter(watchedAnimeOption);
@@ -564,7 +581,7 @@ public class AnimeManagerGUI {
 
 		Parent showTrackingAnimePane = fxmlLoader.load();
 
-		mainPanel.getChildren().clear();
+
 
 
 		mainPanel.setCenter(showTrackingAnimePane);
@@ -572,29 +589,61 @@ public class AnimeManagerGUI {
 	}
 
 	@FXML
-	void addAnime(ActionEvent event) {
+	void addAnime(ActionEvent event) throws IOException {
+
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddAnimetoWatchList.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent addAnimetoWatchList = fxmlLoader.load();
 
 
+
+
+		mainPanel.setCenter(addAnimetoWatchList);
 
 
 
 	}
 
 	@FXML
-	void editAnimeStatus(ActionEvent event) {
+	void editAnimeStatus(ActionEvent event) throws IOException {
+
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("editAnimeStatus.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent editAnimeStatuss = fxmlLoader.load();
+
+
+
+		mainPanel.setCenter(editAnimeStatuss);
+
+	}
+
+	@FXML
+	void saveCurrentEp(ActionEvent event) {
+
+	}
+
+	@FXML
+	void saveCurrentScore(ActionEvent event) {
 
 	}
 
 
 	@FXML
-	void sortByScore(ActionEvent event) {
+	void sortbycurrentScore(ActionEvent event) {
 
 	}
 
 	@FXML
-	void sortByTotalEp(ActionEvent event) {
+	void sortByCurrentEp(ActionEvent event) {
 
 	}
+
+
+
 	@FXML
 	void addAnimetoWatchList(ActionEvent event) {
 
@@ -613,7 +662,7 @@ public class AnimeManagerGUI {
 
 		Parent toAddwatchedanimeop = fxmlLoader.load();
 
-		mainPanel.getChildren().clear();
+
 
 		watchedanimeairtime.setVisible(false);
 
@@ -631,10 +680,22 @@ public class AnimeManagerGUI {
 		mainPanel.setCenter(toAddwatchedanimeop);
 
 
+
 	}
 
 	@FXML
-	void showWatchedAnimeList(ActionEvent event) {
+	void showWatchedAnimeList(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("showWatchedAnime.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent showWatchedAnimeScreen = fxmlLoader.load();
+
+
+
+		mainPanel.setCenter(showWatchedAnimeScreen);
+
+
 
 	}
 
@@ -672,6 +733,8 @@ public class AnimeManagerGUI {
 
 	@FXML
 	void addWatchedAnime(ActionEvent event) {
+
+
 
 	}
 
@@ -711,7 +774,19 @@ public class AnimeManagerGUI {
 	//All Comic Options 
 
 	@FXML
-	void manageComicList(ActionEvent event) {
+	void manageComicList(ActionEvent event) throws IOException {
+
+		returnButton.setVisible(true);
+
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainComicOption.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent mainComicOptionScreen = fxmlLoader.load();
+
+
+
+		mainPanel.setCenter(mainComicOptionScreen);
 
 	}
 
@@ -732,22 +807,131 @@ public class AnimeManagerGUI {
 
 
 	@FXML
-	void editComicStatusOption(ActionEvent event) {
+	void editComicStatusOption(ActionEvent event) throws IOException {
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("editComicStatus.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent editComicStatusScreen = fxmlLoader.load();
+
+
+		mainPanel.setCenter(editComicStatusScreen);
 
 	}
 
 	@FXML
-	void showFollowedComics(ActionEvent event) {
+	void showFollowedComics(ActionEvent event) throws IOException {
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("showTrackingComic.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent showFollowedComicsScreen = fxmlLoader.load();
+
+
+		mainPanel.setCenter(showFollowedComicsScreen);
 
 	}
 
 	@FXML
-	void showReadedComicOp(ActionEvent event) {
+	void showReadedComicOp(ActionEvent event) throws IOException {
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ReadedComicOption.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent readedComicOptionScreen = fxmlLoader.load();
+
+
+		mainPanel.setCenter(readedComicOptionScreen);
 
 	}
 
 	@FXML
-	void showTrackComicOp(ActionEvent event) {
+	void showTrackComicOp(ActionEvent event) throws IOException {
+
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TrackingComicOption.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent showTrackComicOptionscreen = fxmlLoader.load();
+
+
+		mainPanel.setCenter(showTrackComicOptionscreen);
+
+	}
+
+	@FXML
+	void addComicToFollowOp(ActionEvent event) throws IOException {
+      
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addComicToReadList.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent addComicToReadListScreen = fxmlLoader.load();
+
+
+		mainPanel.setCenter(addComicToReadListScreen);
+		
+		
+	}
+	
+	@FXML
+    void addReadedComicOp(ActionEvent event) throws IOException {
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addReadedComic.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent addReadedComicScreen = fxmlLoader.load();
+		
+		ReadedComicColorized.setVisible(false);
+
+	    readedcomiccolorizedtxt.setVisible(false);
+
+	     readedComicAdap.setVisible(false);
+
+	     readedcomicanimeadaptxt.setVisible(false);
+
+
+		mainPanel.setCenter(addReadedComicScreen);
+		
+		
+
+    }
+
+    @FXML
+    void showComics(ActionEvent event) {
+
+    }
+
+
+	@FXML
+	void addIfManga2(ActionEvent event) {
+		
+		
+		      mangaop2
+
+		     manhwaop2
+
+		   ReadedComicColorized;
+
+		    readedcomiccolorizedtxt;
+
+		     readedComicAdap;
+
+		     readedcomicanimeadaptxt;
+
+	}
+
+	@FXML
+	void addIfManhwa2(ActionEvent event) {
+
+	}
+
+	@FXML
+	void addReadedComic(ActionEvent event) {
 
 	}
 
@@ -773,6 +957,7 @@ public class AnimeManagerGUI {
 
 	@FXML
 	void manageBookList(ActionEvent event) {
+		returnButton.setVisible(true);
 
 	}
 

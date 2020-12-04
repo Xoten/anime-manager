@@ -20,7 +20,7 @@
               </columns>
             </TableView>
             <CheckBox layoutX="496.0" layoutY="102.0" mnemonicParsing="false" onAction="#sortByCurrentEp" text="current Ep" />
-            <CheckBox layoutX="496.0" layoutY="135.0" mnemonicParsing="false" onAction="#sortByScore" text="current Score" />
+            <CheckBox layoutX="496.0" layoutY="135.0" mnemonicParsing="false" onAction="#sortbycurrentScore" text="current Score" />
             <Label layoutX="457.0" layoutY="39.0" prefHeight="17.0" prefWidth="133.0" text="Filltros de Ordenamiento" />
          </children>
       </AnchorPane>

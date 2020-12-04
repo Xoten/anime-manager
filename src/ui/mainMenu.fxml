@@ -7,19 +7,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField fx:id="searchusertxt" layoutX="277.0" layoutY="14.0" />
-      <Button layoutX="190.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchUser" text="search User" />
-      <ImageView fitHeight="87.0" fitWidth="88.0" layoutX="498.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="txtusernick" layoutX="528.0" layoutY="118.0" text="User1" />
-      <AnchorPane fx:id="menuPane" layoutX="-1.0" layoutY="134.0" prefHeight="266.0" prefWidth="600.0">
+      <AnchorPane fx:id="menuPane" layoutY="104.0" prefHeight="293.0" prefWidth="600.0">
          <children>
-            <Button layoutX="188.0" layoutY="36.0" mnemonicParsing="false" onAction="#manageAnimeList" prefHeight="38.0" prefWidth="224.0" text="manage AnimeList" />
-            <Button layoutX="188.0" layoutY="83.0" mnemonicParsing="false" onAction="#manageComicList" prefHeight="38.0" prefWidth="224.0" text="manage MangaList" />
-            <Button layoutX="188.0" layoutY="133.0" mnemonicParsing="false" onAction="#manageBookList" prefHeight="38.0" prefWidth="224.0" text="manage Light Novel List" />
-            <Button layoutX="188.0" layoutY="186.0" mnemonicParsing="false" onAction="#manageQuizzes" prefHeight="38.0" prefWidth="224.0" text="manage Quizzes" />
+            <Button layoutX="188.0" layoutY="14.0" mnemonicParsing="false" onAction="#manageAnimeList" prefHeight="38.0" prefWidth="224.0" text="manage AnimeList" />
+            <Button layoutX="188.0" layoutY="64.0" mnemonicParsing="false" onAction="#manageComicList" prefHeight="38.0" prefWidth="224.0" text="manage MangaList" />
+            <Button layoutX="188.0" layoutY="113.0" mnemonicParsing="false" onAction="#manageBookList" prefHeight="38.0" prefWidth="224.0" text="manage Light Novel List" />
+            <Button layoutX="188.0" layoutY="159.0" mnemonicParsing="false" onAction="#manageQuizzes" prefHeight="38.0" prefWidth="224.0" text="manage Quizzes" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="mainMenuPane" layoutY="-1.0" prefHeight="107.0" prefWidth="600.0">
+         <children>
+            <Button layoutX="177.0" layoutY="20.0" mnemonicParsing="false" onAction="#searchUser" text="search User" />
+            <TextField fx:id="searchusertxt" layoutX="265.0" layoutY="20.0" />
+            <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="504.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="txtusernick" layoutX="521.0" layoutY="79.0" text="User1" />
+            <Button fx:id="returnButton" layoutX="34.0" layoutY="67.0" mnemonicParsing="false" onAction="#returnToMainMenu" text="Go back to menu" />
          </children>
       </AnchorPane>
    </children>
