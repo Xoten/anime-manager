@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutY="96.0" prefHeight="304.0" prefWidth="608.0">
+         <children>
+            <TableView fx:id="tcTrackingNovel" layoutX="14.0" layoutY="56.0" prefHeight="234.0" prefWidth="468.0">
+              <columns>
+                <TableColumn fx:id="tcFLNovelName" prefWidth="167.0" text="L.Novel Name" />
+                <TableColumn fx:id="tcFLScore" prefWidth="53.0" text="Score" />
+                  <TableColumn fx:id="tcFLNCChapter" prefWidth="60.0" text="c.Chapter" />
+                  <TableColumn fx:id="tcFLNovelTChap" prefWidth="75.0" text="t.Chapter" />
+                  <TableColumn fx:id="tcFLTotalNVolumes" prefWidth="57.0" text="Volumes" />
+                  <TableColumn fx:id="tcFLNovelCrrVol" prefWidth="55.0" text="c.Vol" />
+              </columns>
+            </TableView>
+            <CheckBox layoutX="496.0" layoutY="102.0" mnemonicParsing="false" onAction="#sortCurrentnovelbyCrrVol" text="c.Vol" />
+            <CheckBox layoutX="496.0" layoutY="135.0" mnemonicParsing="false" onAction="#sortCrrNovelbyChap" text="c.Chapter" />
+            <Label layoutX="463.0" layoutY="39.0" prefHeight="17.0" prefWidth="133.0" text="Filltros de Ordenamiento" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

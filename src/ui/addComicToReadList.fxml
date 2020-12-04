@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="-5.0" layoutY="90.0" prefHeight="310.0" prefWidth="611.0">
+         <children>
+            <Label layoutX="54.0" layoutY="20.0" text="Name" />
+            <Label layoutX="52.0" layoutY="58.0" text="Chapters" />
+            <Label layoutX="51.0" layoutY="95.0" prefHeight="17.0" prefWidth="49.0" text="Author" />
+            <Label layoutX="46.0" layoutY="128.0" prefHeight="17.0" prefWidth="49.0" text="Genres" />
+            <Label layoutX="39.0" layoutY="171.0" text="Volumes" />
+            <Label layoutX="373.0" layoutY="87.0" text="current Ep" />
+            <Label layoutX="371.0" layoutY="116.0" text="current Vol" />
+            <Label layoutX="365.0" layoutY="147.0" text="current Score" />
+            <TextField fx:id="comicnametxt" layoutX="107.0" layoutY="16.0" prefHeight="25.0" prefWidth="139.0" />
+            <TextField fx:id="comicchapterstxt" layoutX="107.0" layoutY="54.0" prefHeight="25.0" prefWidth="139.0" />
+            <TextField fx:id="comicauthortxt" layoutX="107.0" layoutY="91.0" prefHeight="25.0" prefWidth="139.0" />
+            <TextField fx:id="comicgenrestxt" layoutX="107.0" layoutY="124.0" prefHeight="25.0" prefWidth="139.0" />
+            <TextField fx:id="comicvolumestxt" layoutX="107.0" layoutY="167.0" prefHeight="25.0" prefWidth="139.0" />
+            <TextField fx:id="comiccurrentchaptxt" layoutX="459.0" layoutY="83.0" prefHeight="25.0" prefWidth="139.0" />
+            <TextField fx:id="comiccurvoltxt" layoutX="459.0" layoutY="112.0" prefHeight="25.0" prefWidth="139.0" />
+            <TextField fx:id="comiccurscoretxt" layoutX="459.0" layoutY="143.0" prefHeight="25.0" prefWidth="139.0" />
+            <Button layoutX="433.0" layoutY="263.0" mnemonicParsing="false" onAction="#AddComicToReadList" text="Add Comic to Read List" />
+            <Label layoutX="342.0" layoutY="176.0" prefHeight="25.0" prefWidth="98.0" text="Anime Adaptation" />
+            <TextField fx:id="comicAdaptxtxt" layoutX="459.0" layoutY="176.0" prefHeight="25.0" prefWidth="139.0" />
+            <CheckBox layoutX="404.0" layoutY="33.0" mnemonicParsing="false" onAction="#addToReadListIfManga" text="Manga" />
+            <CheckBox layoutX="403.0" layoutY="58.0" mnemonicParsing="false" onAction="#AddToReadListIfManhwa" text="Manhwa" />
+            <Label layoutX="427.0" layoutY="12.0" text="Type" />
+            <Label layoutX="365.0" layoutY="210.0" prefHeight="17.0" prefWidth="71.0" text="Colorized" />
+            <TextField fx:id="comicColorizedtxt" layoutX="463.0" layoutY="206.0" prefHeight="25.0" prefWidth="140.0" />
+            <Label layoutX="48.0" layoutY="210.0" text="Image" />
+            <TextField fx:id="TFComicImagetxt" layoutX="102.0" layoutY="206.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

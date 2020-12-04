@@ -22,8 +22,12 @@ import model.Anime;
 import model.AnimeManager;
 
 public class AnimeManagerGUI {
+	
+	
 
 	AnimeManager am;
+	
+	
 	@FXML
 	private BorderPane mainPanel;
 	@FXML
@@ -157,6 +161,187 @@ public class AnimeManagerGUI {
 
 	@FXML
 	private CheckBox seriesOp;
+	@FXML
+	private TableView<?> tvWatchedAnime;
+
+	@FXML
+	private TableColumn<?, ?> tcWAnimeName;
+
+	@FXML
+	private TableColumn<?, ?> tcWAnimeScore;
+
+	@FXML
+	private TableColumn<?, ?> tcWAEpisodes;
+
+	@FXML
+	private TableColumn<?, ?> TcWAnimeType;
+
+	@FXML
+	private TableColumn<?, ?> TcSWAStudios;
+	@FXML
+	private TableView<?> tcReadedComic;
+
+	@FXML
+	private TableColumn<?, ?> tcReadedComicName;
+
+	@FXML
+	private TableColumn<?, ?> tcReadedComicScore;
+
+	@FXML
+	private TableColumn<?, ?> tcReadedComicChapters;
+
+	@FXML
+	private TableColumn<?, ?> tcReadedComicType;
+
+	@FXML
+	private TableColumn<?, ?> tcReadedComicAuthor;
+
+	@FXML
+	private TableColumn<?, ?> tcReadedComicVolumes;
+
+
+	@FXML
+	private TableView<?> tcFComic;
+
+	@FXML
+	private TableColumn<?, ?> tcFComicame;
+
+	@FXML
+	private TableColumn<?, ?> tcFComicCScore;
+
+	@FXML
+	private TableColumn<?, ?> tcFComicCurrChap;
+
+	@FXML
+	private TableColumn<?, ?> tcFComicType;
+
+	@FXML
+	private TableColumn<?, ?> tcCurrentCVol;
+
+	@FXML
+	private TableColumn<?, ?> tcFComicChap;
+
+	@FXML
+	private TableView<?> tcReadedNovel;
+
+	@FXML
+	private TableColumn<?, ?> tcNovelName;
+
+	@FXML
+	private TableColumn<?, ?> tcNovelScore;
+
+	@FXML
+	private TableColumn<?, ?> tcNovelChapters;
+
+	@FXML
+	private TableColumn<?, ?> tcNovelAdaptation;
+
+	@FXML
+	private TableColumn<?, ?> tcNovelVol;
+	@FXML
+	private TableView<?> tcTrackingNovel;
+
+	@FXML
+	private TableColumn<?, ?> tcFLNovelName;
+
+	@FXML
+	private TableColumn<?, ?> tcFLScore;
+
+	@FXML
+	private TableColumn<?, ?> tcFLNCChapter;
+
+	@FXML
+	private TableColumn<?, ?> tcFLNovelTChap;
+
+	@FXML
+	private TableColumn<?, ?> tcFLTotalNVolumes;
+
+	@FXML
+	private TableColumn<?, ?> tcFLNovelCrrVol;
+	@FXML
+	private TextField comicnametxt;
+
+	@FXML
+	private TextField comicchapterstxt;
+
+	@FXML
+	private TextField comicauthortxt;
+
+	@FXML
+	private TextField comicgenrestxt;
+
+	@FXML
+	private TextField comicvolumestxt;
+
+	@FXML
+	private TextField comiccurrentchaptxt;
+
+	@FXML
+	private TextField comiccurvoltxt;
+
+	@FXML
+	private TextField comiccurscoretxt;
+
+	@FXML
+	private TextField comicAdaptxtxt;
+
+	@FXML
+	private TextField comicColorizedtxt;
+
+	@FXML
+	private TextField TFComicImagetxt;
+
+	@FXML
+	private TextField modifyCurrComicScoretxt;
+
+	@FXML
+	private TextField modifyCurrComicChaptxt;
+
+	@FXML
+	private TextField modifyCurrComicVoltxt;
+    @FXML
+    private TextField searchComictxt;
+    @FXML
+    private TextField ReadedComictxt;
+
+    @FXML
+    private TextField readedcomicpicturetxt;
+
+    @FXML
+    private TextField readedcomicauthortxt;
+
+    @FXML
+    private TextField readedcomicgenretxt;
+
+    @FXML
+    private TextField readedcomicchapterstxt;
+
+    @FXML
+    private TextField readedcomicscoretxt;
+
+    @FXML
+    private CheckBox mangaop2;
+
+    @FXML
+    private CheckBox manhwaop2;
+
+    @FXML
+    private Label ReadedComicColorized;
+
+    @FXML
+    private TextField readedcomiccolorizedtxt;
+
+    @FXML
+    private Label readedComicAdap;
+
+    @FXML
+    private TextField readedcomicanimeadaptxt;
+
+    @FXML
+    private TextField readedcomicvolumestxt;
+
+
+
 
 
 
@@ -306,6 +491,9 @@ public class AnimeManagerGUI {
 		alert.showAndWait();
 	}
 	@FXML
+
+	//Anime Section
+	//All Anime Options
 	void manageAnimeList(ActionEvent event) throws IOException {
 
 
@@ -319,15 +507,9 @@ public class AnimeManagerGUI {
 		mainPanel.setCenter(animeOptionPane);
 	}
 
-	@FXML
-	void manageBookList(ActionEvent event) {
 
-	}
 
-	@FXML
-	void manageComicList(ActionEvent event) {
 
-	}
 
 	@FXML
 	void manageQuizzes(ActionEvent event) {
@@ -404,12 +586,6 @@ public class AnimeManagerGUI {
 	}
 
 
-
-	@FXML
-	void sortByAnimeName(ActionEvent event) {
-
-	}
-
 	@FXML
 	void sortByScore(ActionEvent event) {
 
@@ -468,7 +644,7 @@ public class AnimeManagerGUI {
 
 
 		if(seriesOp.isSelected() == true) {
-			
+
 			movieOp.setDisable(true);
 			watchedanimeairtime.setVisible(true);
 
@@ -478,7 +654,7 @@ public class AnimeManagerGUI {
 
 			watchedanimeairtimetxt.setVisible(true);
 		}else {
-			
+
 			movieOp.setDisable(false);
 
 			watchedanimeairtime.setVisible(false);
@@ -520,6 +696,108 @@ public class AnimeManagerGUI {
 
 
 	}
+
+	@FXML
+	void SortWatchedAnimebyScore(ActionEvent event) {
+
+	}
+
+	@FXML
+	void sortWatchedAnimebyName(ActionEvent event) {
+
+	}
+
+	//Comic Section
+	//All Comic Options 
+
+	@FXML
+	void manageComicList(ActionEvent event) {
+
+	}
+
+	@FXML
+	void AddComicToReadList(ActionEvent event) {
+
+	}
+
+	@FXML
+	void AddToReadListIfManhwa(ActionEvent event) {
+
+	}
+
+	@FXML
+	void addToReadListIfManga(ActionEvent event) {
+
+	}
+
+
+	@FXML
+	void editComicStatusOption(ActionEvent event) {
+
+	}
+
+	@FXML
+	void showFollowedComics(ActionEvent event) {
+
+	}
+
+	@FXML
+	void showReadedComicOp(ActionEvent event) {
+
+	}
+
+	@FXML
+	void showTrackComicOp(ActionEvent event) {
+
+	}
+
+
+	@FXML
+	void sortReadedComicByAuthor(ActionEvent event) {
+
+	}
+
+	@FXML
+	void sortReadedComicByVolumes(ActionEvent event) {
+
+	}
+
+	@FXML
+	void sortFollowingComicbyVol(ActionEvent event) {
+
+	}
+
+	//Book Section
+	//All Book Options
+
+
+	@FXML
+	void manageBookList(ActionEvent event) {
+
+	}
+
+	@FXML
+	void sortReadedBookByVolumes(ActionEvent event) {
+
+	}
+
+	@FXML
+	void sortReadedBookbyName(ActionEvent event) {
+
+	}
+
+
+	@FXML
+	void sortCrrNovelbyChap(ActionEvent event) {
+
+	}
+
+	@FXML
+	void sortCurrentnovelbyCrrVol(ActionEvent event) {
+
+	}
+
+
 
 
 

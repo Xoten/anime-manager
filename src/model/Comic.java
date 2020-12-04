@@ -9,6 +9,7 @@ public class Comic {
 	private String image;
 	private String name;
 	
+	
 	public Comic( String n, int c, int v, String a,String g, String i) {
 		
 	chapters = c;

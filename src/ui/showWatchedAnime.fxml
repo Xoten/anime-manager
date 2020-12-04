@@ -13,14 +13,15 @@
          <children>
             <TableView fx:id="tvTrackingAnime" layoutX="14.0" layoutY="56.0" prefHeight="234.0" prefWidth="451.0">
               <columns>
-                <TableColumn fx:id="tcAnimeName" prefWidth="167.0" text="Anime Name" />
-                <TableColumn fx:id="tcCurentScore" prefWidth="100.0" text="Current Score" />
-                  <TableColumn fx:id="tcCurrentEp" prefWidth="97.0" text="Current Ep" />
-                  <TableColumn fx:id="tcTotalEp" prefWidth="113.0" text="Total Ep" />
+                <TableColumn fx:id="tcWAnimeName" prefWidth="167.0" text="Anime Name" />
+                <TableColumn fx:id="tcWAnimeScore" prefWidth="100.0" text="Score" />
+                  <TableColumn fx:id="tcWAEpisodes" prefWidth="97.0" text="Episodes" />
+                  <TableColumn fx:id="TcWAnimeType" prefWidth="113.0" text="Type" />
               </columns>
             </TableView>
-            <CheckBox layoutX="496.0" layoutY="102.0" mnemonicParsing="false" onAction="#sortByCurrentEp" text="current Ep" />
-            <CheckBox layoutX="496.0" layoutY="135.0" mnemonicParsing="false" onAction="#sortByScore" text="current Score" />
+            <CheckBox layoutX="494.0" layoutY="75.0" mnemonicParsing="false" onAction="#sortWatchedAnimebyName" text="Nombre" />
+            <CheckBox layoutX="496.0" layoutY="102.0" mnemonicParsing="false" onAction="#sortWatchedAnimeByType" text="Type" />
+            <CheckBox layoutX="496.0" layoutY="135.0" mnemonicParsing="false" onAction="#SortWatchedAnimebyScore" text="Score" />
             <Label layoutX="457.0" layoutY="39.0" prefHeight="17.0" prefWidth="133.0" text="Filltros de Ordenamiento" />
          </children>
       </AnchorPane>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="7.0" layoutY="80.0" prefHeight="306.0" prefWidth="608.0">
+         <children>
+            <Label layoutX="56.0" layoutY="8.0" text="Name" />
+            <Label layoutX="53.0" layoutY="46.0" text="Picture" />
+            <Label layoutX="48.0" layoutY="74.0" prefHeight="17.0" prefWidth="49.0" text="Author" />
+            <Label layoutX="47.0" layoutY="145.0" prefHeight="17.0" prefWidth="49.0" text="Genres" />
+            <Label layoutX="41.0" layoutY="183.0" text="Chapters" />
+            <TextField fx:id="ReadedComictxt" layoutX="107.0" layoutY="4.0" prefHeight="25.0" prefWidth="139.0" />
+            <TextField fx:id="readedcomicpicturetxt" layoutX="107.0" layoutY="42.0" prefHeight="25.0" prefWidth="139.0" />
+            <TextField fx:id="readedcomicauthortxt" layoutX="107.0" layoutY="70.0" prefHeight="25.0" prefWidth="139.0" />
+            <TextField fx:id="readedcomicgenretxt" layoutX="107.0" layoutY="141.0" prefHeight="25.0" prefWidth="139.0" />
+            <TextField fx:id="readedcomicchapterstxt" layoutX="107.0" layoutY="179.0" prefHeight="25.0" prefWidth="139.0" />
+            <Button layoutX="412.0" layoutY="242.0" mnemonicParsing="false" onAction="#addReadedComic" text="Add Comic" />
+            <Label layoutX="48.0" layoutY="108.0" prefHeight="17.0" prefWidth="49.0" text="Score" />
+            <TextField fx:id="readedcomicscoretxt" layoutX="107.0" layoutY="104.0" prefHeight="25.0" prefWidth="139.0" />
+            <CheckBox fx:id="mangaop2" layoutX="385.0" layoutY="83.0" mnemonicParsing="false" onAction="#addIfManga2" text="Manga" />
+            <CheckBox fx:id="manhwaop2" layoutX="385.0" layoutY="108.0" mnemonicParsing="false" onAction="#addIfManhwa2" text="Manhwa" />
+            <Label layoutX="399.0" layoutY="46.0" text="Type" />
+            <Label fx:id="ReadedComicColorized" layoutX="292.0" layoutY="174.0" prefHeight="17.0" prefWidth="90.0" text="Colorized" />
+            <TextField fx:id="readedcomiccolorizedtxt" layoutX="385.0" layoutY="170.0" />
+            <Label fx:id="readedComicAdap" layoutX="269.0" layoutY="145.0" prefHeight="17.0" prefWidth="105.0" text="Anime Adaptation" />
+            <TextField fx:id="readedcomicanimeadaptxt" layoutX="385.0" layoutY="141.0" />
+            <Label layoutX="42.0" layoutY="215.0" text="Volumes" />
+            <TextField fx:id="readedcomicvolumestxt" layoutX="104.0" layoutY="211.0" prefHeight="25.0" prefWidth="139.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>
