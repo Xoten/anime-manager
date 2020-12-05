@@ -86,6 +86,36 @@ public class AnimeManager {
 	//**********************ANIME SECTION********************************************************************************************
 
 
+
+	// **************MISCELANIOUS ANIME METHODS*********************************************************************************
+
+
+
+	public LinkedList<Anime> toComprobateIfAnimeisCompleted(){
+
+		LinkedList<Anime> animeslist = new LinkedList<>();
+
+		for(int i = 0; i< animes.size();i++) {
+
+
+			if(animes.get(i) instanceof FollowingAnime && animes.get(i).getScore() != 0) {
+
+				animeslist.add(animes.get(i));
+
+			}else if(animes.get(i).getScore() != 0) {
+
+				animeslist.add(animes.get(i));		
+			}		
+		}
+
+		return animeslist;
+
+	}
+
+
+
+
+
 	//ADD ANIME METHODS*********************************************************************************************************
 
 
@@ -98,12 +128,44 @@ public class AnimeManager {
 		animes.add(animeToAdd);
 	}
 
+	//Search Anime Method************************************************
+
+	/**This method search an anime by its Name
+	 * 
+	 * @param animeName is the name of the anime the user wants to search
+	 * @return the anime if its exists
+	 */
+
+	public Anime searchAnime(String animeName) {
+		Anime animeToSearch = null;
+		boolean find = false;
+		int in = 0;
+		int fin = animes.size();
+
+		while(in <= fin && !find) {
+			int pos = (int) Math.floor((in+fin)/2);
+			if(pos != animes.size()) {
+				String el = animes.get(pos).getName();
+				int compar = animeName.compareToIgnoreCase(el);
+				if(compar == 0) {
+					animeToSearch = animes.get(pos);
+					find = true;
+				} else if(compar < 0) {
+					fin = pos - 1;
+				} else if(compar > 0) {
+					in = pos + 1;
+				}
+			}
+		}
+		return animeToSearch;
+	}
+
 
 	//**********************SORT ANIME METHODS*********************************************
 
 	public LinkedList<Anime> getListAnimeListFiltredbyScoreUsingBubble() {
 		LinkedList<Anime> anlist = new LinkedList<>();
-		Anime[] temporal = animes.toArray(new Anime[animes.size()]);
+		Anime[] temporal = toComprobateIfAnimeisCompleted().toArray(new Anime[animes.size()]);
 		Anime temp = null;
 		for(int c = 0; c < temporal.length; c++) {
 			for(int v = 1; v < (temporal.length - c); v++) {
@@ -121,9 +183,11 @@ public class AnimeManager {
 		return anlist;
 	}
 
+
+
 	public LinkedList<Anime> getAnimeListFiltredbyNameSelection() {
 		LinkedList<Anime> animelist = new LinkedList<>();
-		Anime[] temporalL = animes.toArray(new Anime[animes.size()]);
+		Anime[] temporalL = toComprobateIfAnimeisCompleted().toArray(new Anime[animes.size()]);
 		for(int c = 0; c < temporalL.length - 1; c++ ) {
 			int menor= c;
 			int index = c;

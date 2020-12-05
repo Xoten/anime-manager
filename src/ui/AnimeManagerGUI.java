@@ -183,22 +183,27 @@ public class AnimeManagerGUI {
 	@FXML
 	private CheckBox seriesOp;
 	@FXML
-	private TableView<?> tvWatchedAnime;
+	private TableView<Anime> tvWatchedAnime;
 
 	@FXML
-	private TableColumn<?, ?> tcWAnimeName;
+	private TableColumn<Anime, String> tcWAnimeName;
 
 	@FXML
-	private TableColumn<?, ?> tcWAnimeScore;
+	private TableColumn<Anime, Integer> tcWAnimeScore;
 
 	@FXML
-	private TableColumn<?, ?> tcWAEpisodes;
+	private TableColumn<Anime, Integer> tcWAEpisodes;
 
 	@FXML
-	private TableColumn<?, ?> TcWAnimeType;
+	private TableColumn<Anime, String> TcWAnimeType;
 
 	@FXML
-	private TableColumn<?, ?> TcSWAStudios;
+	private TableColumn<Anime, String> TcSWAStudios;
+	@FXML
+    private CheckBox SortIfAnimeName;
+
+    @FXML
+    private CheckBox SortIfAnimeScore;
 	@FXML
 	private TableView<?> tcReadedComic;
 	@FXML
@@ -653,6 +658,17 @@ public class AnimeManagerGUI {
 
 	@FXML
 	void searchAnime(ActionEvent event) {
+		
+			FollowingAnime animesearched = (FollowingAnime)am.searchAnime(searchanimetxt.getText());
+		
+			searchedAnime.setText(animesearched.getName());
+			animetype.setText(animesearched.getType());
+			currentEp.setText(String.valueOf(animesearched.getCurrentep()));
+			currentScore.setText(String.valueOf(animesearched.getCurrentscore()));
+			totalEp.setText(String.valueOf(animesearched.getEpisodes()));
+			
+			
+		
 
 	}
 
@@ -673,11 +689,20 @@ public class AnimeManagerGUI {
 
 	@FXML
 	void saveCurrentEp(ActionEvent event) {
-
+      
+		FollowingAnime animesearch = (FollowingAnime)am.searchAnime(searchanimetxt.getText());
+		
+		animesearch.setCurrentep(Integer.parseInt(modifycurrentepanimetxt.getText()));
+		
+		
 	}
 
 	@FXML
 	void saveCurrentScore(ActionEvent event) {
+		
+        FollowingAnime animesearch = (FollowingAnime)am.searchAnime(searchanimetxt.getText());
+		
+		animesearch.setCurrentscore(Integer.parseInt(modifycurrentscoretxt.getText()));
 
 	}
 
@@ -791,6 +816,16 @@ public class AnimeManagerGUI {
 
 
 	}
+	
+	public void initializeWatchedAnimeList() {
+		tcWAnimeName.setCellValueFactory(new PropertyValueFactory<Anime, String>("name"));
+		tcWAnimeScore.setCellValueFactory(new PropertyValueFactory<Anime, Integer>("score"));
+		tcWAEpisodes.setCellValueFactory(new PropertyValueFactory<Anime, Integer>("episodes"));
+	    TcWAnimeType.setCellValueFactory(new PropertyValueFactory<Anime, String>("type"));
+	    TcSWAStudios.setCellValueFactory(new PropertyValueFactory<Anime, String>("studios"));
+		
+		
+	}
 
 	@FXML
 	void showWatchedAnimeList(ActionEvent event) throws IOException {
@@ -803,6 +838,7 @@ public class AnimeManagerGUI {
 
 
 		mainPanel.setCenter(showWatchedAnimeScreen);
+		initializeWatchedAnimeList();
 
 
 
@@ -867,13 +903,49 @@ public class AnimeManagerGUI {
 
 	@FXML
 	void SortWatchedAnimebyScore(ActionEvent event) {
+		
+		ObservableList <Anime> oblist;
+		if(SortIfAnimeScore.isSelected() == true) {
+			
+			SortIfAnimeName.setDisable(true);
+			oblist = FXCollections.observableList(am.getListAnimeListFiltredbyScoreUsingBubble());
+			 tvWatchedAnime.setItems(oblist);
+			
+			
+		}else {
+			
+			
+			SortIfAnimeName.setDisable(false);
+			tvWatchedAnime.setItems(null);
+		}
+
 
 	}
+
+	
 
 	@FXML
 	void sortWatchedAnimebyName(ActionEvent event) {
+		
+		ObservableList <Anime> oblist;
+		if(SortIfAnimeName.isSelected() == true) {
+			
+			SortIfAnimeScore.setDisable(true);
+			oblist = FXCollections.observableList(am.getAnimeListFiltredbyNameSelection());
+			 tvWatchedAnime.setItems(oblist);
+			
+			
+		}else {
+			
+			
+			SortIfAnimeScore.setDisable(false);
+			tvWatchedAnime.setItems(null);
+		}
+
 
 	}
+
+	
 
 	//Comic Section**************************************************************************************
 	//All Comic Options ***********************************************************************************
