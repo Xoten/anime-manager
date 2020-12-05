@@ -14,7 +14,7 @@ public void setupStage1() {
 	@Test
 	public void testManga() {
 		setupStage1();
-		Manga m = new Manga("Kimi No Nawa",24, 12 , "Kideo", "Gore, Romance",  "asd123", "Kimi No Nawa X");
+		Manga m = new Manga("Kimi No Nawa","Manga",24, 12 , "Kideo", "Gore, Romance",  "asd123", 8, "Kimi No Nawa X");
 		
 		assertEquals("Kimi No Nawa", m.getName());
 		assertEquals(24 ,m.getChapters());

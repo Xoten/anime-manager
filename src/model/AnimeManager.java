@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 
 import exceptions.AnimeNameAlreadyExistsException;
+import exceptions.ComicNameAlreadyExistsException;
 import exceptions.NotTheSamePasswordException;
 
 
@@ -14,7 +15,7 @@ public class AnimeManager {
 
 	private LinkedList<User> users;
 	private LinkedList<Anime> animes;
-	private ArrayList<Comic> mangas;
+	private ArrayList<Comic> comics;
 	private ArrayList<Comic>  manhwas;
 	private ArrayList<Book> lnovels;
 	private ArrayList<Quizz> quizzes;
@@ -24,7 +25,7 @@ public class AnimeManager {
 
 		users = new LinkedList<>();
 		animes = new LinkedList<>();
-		mangas = new ArrayList<>();
+		comics = new ArrayList<>();
 		manhwas = new ArrayList<>();
 		lnovels = new ArrayList<>();
 		quizzes = new ArrayList<>();
@@ -317,11 +318,82 @@ public class AnimeManager {
 		return listFollowingAnime;
 	}
 
+//***********************************************COMIC METHODS SECTION*********************************************************
+
+	
+	public void addComicToComicList(Comic comicToAdd) throws ComicNameAlreadyExistsException{
+		for(int i = 0; i < comics.size(); i++) {
+			if(comicToAdd.getName().equals(comics.get(i).getName())) {
+				throw new ComicNameAlreadyExistsException();
+			}
+		}
+		
+		if(comics.isEmpty()) {
+			comics.add(comicToAdd);
+		} else {
+			int c = 0;
+			while(c < comics.size() && comparatorAddComic(comicToAdd.getName(), (comics.get(c)).getName()) >= 1) {
+				c++;
+			}
+			comics.add(c, comicToAdd);
+		}
+		
+	}
+	
+	public ArrayList<Comic> toRemoveComicFromReadList(){
+
+		ArrayList<Comic> comiclist = new ArrayList<>();
+
+		for(int i = 0; i< comics.size();i++) {
 
 
+			if(comics.get(i) instanceof FollowingManga && comics.get(i).getScore() == 0) {
 
-	public ArrayList<Comic> getMangas() {
-		return mangas;
+				comiclist.add(comics.get(i));
+
+			}
+		}
+
+		return comiclist;
+
+	}
+	
+	public ArrayList<FollowingManga> getComicListSortedByCurrentVolInsertion() {
+		ArrayList<FollowingManga> comiclist = new ArrayList<>();
+		Comic[] temporaL = toRemoveComicFromReadList().toArray(new Comic[toRemoveComicFromReadList().size()]);
+		ArrayList<FollowingManga> temporaL2 = new ArrayList<>();
+		FollowingManga helper;
+		for(int i = 0; i< temporaL.length; i++) {
+			if(temporaL[i] instanceof FollowingManga) {
+				temporaL2.add((FollowingManga)temporaL[i]);
+			}
+		}
+
+		for(int c = 0; c < temporaL2.size(); c++) {
+			helper = temporaL2.get(c);
+			int i = c - 1;
+			while((i > -1) && (temporaL2.get(i).getCurrentvol()) >(helper.getCurrentvol())) {
+
+				temporaL2.set(i+1, temporaL2.get(i));
+				i--;
+			}
+			temporaL2.set(i+1, helper);
+		}
+		for(int c = 0; c < temporaL2.size(); c++) {
+			comiclist.add(temporaL2.get(c));
+		}
+		return comiclist;
+	}
+	
+	
+	//***SORT COMIC METHODS***************************************************//
+	
+	private int comparatorAddComic(String c1, String c2) {
+		return c1.compareToIgnoreCase(c2);
+	}
+
+	public ArrayList<Comic> getComics() {
+		return comics;
 	}
 
 

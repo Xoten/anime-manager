@@ -26,6 +26,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import model.Anime;
 import model.AnimeManager;
+import model.AnimeMovie;
+import model.AnimeSeries;
 import model.FollowingAnime;
 
 public class AnimeManagerGUI {
@@ -895,13 +897,20 @@ public class AnimeManagerGUI {
 		int episodes = Integer.parseInt(watchedanimeeptxt.getText());
 		int score = Integer.parseInt(watchedanimescoretxt.getText());
 		
-		if(movieOp.isSelected()) {
+		if(seriesOp.isSelected()) {
 			
+			int seasons = Integer.parseInt(watchedanimeseasonstxt.getText());
+			String airingtime = watchedanimeairtimetxt.getText();
+			
+			AnimeSeries as = new AnimeSeries(name, picture, studios,score, "Series", genres, episodes, airingtime, seasons);
+			addNewAnime(as);
 			
 			
 		}else {
 			
-			
+			String release = watchedanimereleasetxt.getText();
+			AnimeMovie am = new AnimeMovie(name,picture, studios, score, "Anime Movie", genres, episodes, release);
+			addNewAnime(am);
 			
 		}
 

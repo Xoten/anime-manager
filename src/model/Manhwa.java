@@ -6,8 +6,8 @@ public class Manhwa extends Comic{
 	
 	
 
-	public Manhwa(String n, int c, int v, String a, String g, String i, boolean cl) {
-		super(n, c, v, a, g, i);
+	public Manhwa(String n,String t, int c, int v, String a, String g, String i, int s, boolean cl) {
+		super(n,t, c, v, a, g, i,s);
    
 		 colorized = cl;
 		

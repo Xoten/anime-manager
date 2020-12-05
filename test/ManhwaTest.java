@@ -14,7 +14,7 @@ public void setupStage1() {
 	@Test
 	public void testManhwa() {
 		setupStage1();
-		Manhwa mw = new Manhwa("Kimi No Nawa",24, 12 , "Kideo", "Gore, Romance",  "asd123", true);
+		Manhwa mw = new Manhwa("Kimi No Nawa","Manhwa",24, 12 , "Kideo", "Gore, Romance",  "asd123", 7,true);
 		
 		assertEquals("Kimi No Nawa", mw.getName());
 		assertEquals(24 ,mw.getChapters());

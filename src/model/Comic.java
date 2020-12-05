@@ -8,9 +8,11 @@ public class Comic {
 	private String genres;
 	private String image;
 	private String name;
+	private int score;
+	private String type;
 	
 	
-	public Comic( String n, int c, int v, String a,String g, String i) {
+	public Comic( String n,String t, int c, int v, String a,String g, String i, int s) {
 		
 	chapters = c;
 	volumes = v;
@@ -18,9 +20,22 @@ public class Comic {
 	genres = g;
 	image = i;
 	name = n;
+	score = s;
+	type = t;
+	
 		
 		
 		
+	}
+	
+	public String getType() {
+		
+		return type;
+	}
+	
+	public int getScore() {
+		
+		return score;
 	}
 	
 	public String getName() {
