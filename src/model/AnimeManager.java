@@ -34,6 +34,8 @@ public class AnimeManager {
 
 
 	}
+	
+	
 
 	public void toAddNewUser( String n, String p, String ph) {
 		User user = null;
@@ -111,6 +113,23 @@ public class AnimeManager {
 		return animeslist;
 
 	}
+	public LinkedList<Anime> toRemoveAnimeFromWatchList(){
+
+		LinkedList<Anime> animeslist = new LinkedList<>();
+
+		for(int i = 0; i< animes.size();i++) {
+
+
+			if(animes.get(i) instanceof FollowingAnime && animes.get(i).getScore() == 0) {
+
+				animeslist.add(animes.get(i));
+
+			}
+		}
+
+		return animeslist;
+
+	}
 
 
 
@@ -125,7 +144,17 @@ public class AnimeManager {
 				throw new AnimeNameAlreadyExistsException();
 			}
 		}
-		animes.add(animeToAdd);
+		
+		if(animes.isEmpty()) {
+			animes.add(animeToAdd);
+		} else {
+			int c = 0;
+			while(c < animes.size() && comparatorAddAnime(animeToAdd.getName(), (animes.get(c)).getName()) >= 1) {
+				c++;
+			}
+			animes.add(c, animeToAdd);
+		}
+		
 	}
 
 	//Search Anime Method************************************************
@@ -140,7 +169,7 @@ public class AnimeManager {
 		Anime animeToSearch = null;
 		boolean find = false;
 		int in = 0;
-		int fin = animes.size();
+		int fin = animes.size()-1;
 
 		while(in <= fin && !find) {
 			int pos = (int) Math.floor((in+fin)/2);
@@ -163,9 +192,13 @@ public class AnimeManager {
 
 	//**********************SORT ANIME METHODS*********************************************
 
+	
+	private int comparatorAddAnime(String animename1, String animename2) {
+		return animename1.compareToIgnoreCase(animename2);
+	}
 	public LinkedList<Anime> getListAnimeListFiltredbyScoreUsingBubble() {
 		LinkedList<Anime> anlist = new LinkedList<>();
-		Anime[] temporal = toComprobateIfAnimeisCompleted().toArray(new Anime[animes.size()]);
+		Anime[] temporal = toComprobateIfAnimeisCompleted().toArray(new Anime[toComprobateIfAnimeisCompleted().size()]);
 		Anime temp = null;
 		for(int c = 0; c < temporal.length; c++) {
 			for(int v = 1; v < (temporal.length - c); v++) {
@@ -182,12 +215,13 @@ public class AnimeManager {
 		}
 		return anlist;
 	}
+	
 
 
 
 	public LinkedList<Anime> getAnimeListFiltredbyNameSelection() {
 		LinkedList<Anime> animelist = new LinkedList<>();
-		Anime[] temporalL = toComprobateIfAnimeisCompleted().toArray(new Anime[animes.size()]);
+		Anime[] temporalL = toComprobateIfAnimeisCompleted().toArray(new Anime[toComprobateIfAnimeisCompleted().size()]);
 		for(int c = 0; c < temporalL.length - 1; c++ ) {
 			int menor= c;
 			int index = c;
@@ -210,7 +244,7 @@ public class AnimeManager {
 
 	public LinkedList<FollowingAnime> getAnimeListFiltredByCurrentEpisode() {
 		LinkedList<FollowingAnime> animelist = new LinkedList<>();
-		Anime[] temporaL = animes.toArray(new Anime[animes.size()]);
+		Anime[] temporaL = toRemoveAnimeFromWatchList().toArray(new Anime[toRemoveAnimeFromWatchList().size()]);
 		ArrayList<FollowingAnime> temporaL2 = new ArrayList<>();
 		FollowingAnime helper;
 		for(int i = 0; i< temporaL.length; i++) {
@@ -238,11 +272,8 @@ public class AnimeManager {
 	public LinkedList<FollowingAnime> getAnimeCurrentScoreComparator() {
 		LinkedList<FollowingAnime> animelistz = new LinkedList<>();
 		LinkedList<FollowingAnime> animelist = new LinkedList<>();
-		for(int c = 0; c < animes.size(); c++) {
-
-			if(animes.get(c) instanceof FollowingAnime) {
-				animelistz.add((FollowingAnime) animes.get(c));
-			}
+		for(int c = 0; c < toRemoveAnimeFromWatchList().size(); c++) {
+				animelistz.add((FollowingAnime) toRemoveAnimeFromWatchList().get(c));
 		}
 
 		animecurrentscorecomparator pcm = new animecurrentscorecomparator();

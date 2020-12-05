@@ -11,7 +11,7 @@
    <children>
       <AnchorPane layoutY="96.0" prefHeight="304.0" prefWidth="608.0">
          <children>
-            <TableView fx:id="tvTrackingAnime" layoutX="14.0" layoutY="56.0" prefHeight="234.0" prefWidth="451.0">
+            <TableView fx:id="tvWatchedAnime" layoutX="14.0" layoutY="56.0" prefHeight="234.0" prefWidth="451.0">
               <columns>
                 <TableColumn fx:id="tcWAnimeName" prefWidth="167.0" text="Anime Name" />
                 <TableColumn fx:id="tcWAnimeScore" prefWidth="100.0" text="Score" />
