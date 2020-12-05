@@ -27,6 +27,10 @@
             <TextField fx:id="currentseasontxt" layoutX="459.0" layoutY="54.0" prefHeight="25.0" prefWidth="139.0" />
             <TextField fx:id="currentscoretxt" layoutX="459.0" layoutY="91.0" prefHeight="25.0" prefWidth="139.0" />
             <Button layoutX="399.0" layoutY="154.0" mnemonicParsing="false" onAction="#addAnimetoWatchList" text="Add Anime to watch list" />
+            <TextField fx:id="airtimetxt" layoutX="107.0" layoutY="206.0" prefHeight="25.0" prefWidth="139.0" />
+            <Label layoutX="39.0" layoutY="210.0" text="Air time" />
+            <TextField fx:id="seasonstxt" layoutX="107.0" layoutY="246.0" prefHeight="25.0" prefWidth="139.0" />
+            <Label layoutX="31.0" layoutY="250.0" text="Seasons" />
          </children>
       </AnchorPane>
    </children>

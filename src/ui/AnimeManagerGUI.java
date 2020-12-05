@@ -2,8 +2,12 @@ package ui;
 
 import java.io.File;
 import java.io.IOException;
+
+import exceptions.AnimeNameAlreadyExistsException;
 import exceptions.NotTheSamePasswordException;
 import model.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,11 +20,13 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import model.Anime;
 import model.AnimeManager;
+import model.FollowingAnime;
 
 public class AnimeManagerGUI {
 
@@ -86,19 +92,24 @@ public class AnimeManagerGUI {
 	private TextField modifycurrentepanimetxt;
 
 	@FXML
-	private TableView<Anime> tvTrackingAnime;
+	private TableView<FollowingAnime> tvTrackingAnime;
 
 	@FXML
-	private TableColumn<Anime, String> tcAnimeName;
+	private TableColumn<FollowingAnime, String> tcAnimeName;
 
 	@FXML
-	private TableColumn<Anime, String> tcCurentScore;
+	private TableColumn<FollowingAnime, Integer> tcCurentScore;
 
 	@FXML
-	private TableColumn<Anime,String> tcCurrentEp;
+	private TableColumn<FollowingAnime,Integer> tcCurrentEp;
 
 	@FXML
-	private TableColumn<Anime,String> tcTotalEp;
+	private TableColumn<FollowingAnime,Integer> tcTotalEp;
+	@FXML
+	private CheckBox sortIfCurrentEp;
+
+	@FXML
+	private CheckBox sortIfCurrentScore;
 
 	@FXML
 	private TextField nametxt;
@@ -114,6 +125,12 @@ public class AnimeManagerGUI {
 
 	@FXML
 	private TextField episodestxt;
+
+	@FXML
+	private TextField airtimetxt;
+
+	@FXML
+	private TextField seasonstxt;
 
 	@FXML
 	private TextField currenteptxt;
@@ -518,8 +535,8 @@ public class AnimeManagerGUI {
 	}
 	@FXML
 
-	//Anime Section
-	//All Anime Options
+	//Anime Section*************************************************************************************************
+	//All Anime Options****************************************************************************************************
 	void manageAnimeList(ActionEvent event) throws IOException {
 
 
@@ -531,6 +548,15 @@ public class AnimeManagerGUI {
 		returnButton.setVisible(true);
 
 		mainPanel.setCenter(animeOptionPane);
+	}
+
+	public void addNewAnime(Anime animetoAdd) {
+		try {
+			am.addAnimeToAnimeList(animetoAdd);
+
+		}catch(AnimeNameAlreadyExistsException al) {
+			addNewAnime(animetoAdd);
+		}
 	}
 
 
@@ -565,6 +591,7 @@ public class AnimeManagerGUI {
 
 	}
 
+
 	@FXML
 	void showWatchedAnimeOp(ActionEvent event) throws IOException {
 
@@ -582,6 +609,15 @@ public class AnimeManagerGUI {
 
 
 	}
+
+	public void initializeTableTrackingAnime() {
+		
+		tcAnimeName.setCellValueFactory(new PropertyValueFactory<FollowingAnime, String>("name"));
+		tcCurentScore.setCellValueFactory(new PropertyValueFactory<FollowingAnime, Integer>("currentscore"));
+		tcCurrentEp.setCellValueFactory(new PropertyValueFactory<FollowingAnime, Integer>("currentep"));
+		tcTotalEp.setCellValueFactory(new PropertyValueFactory<FollowingAnime, Integer>("episodes"));
+
+	}
 	@FXML
 	void ShowTrackingAnime(ActionEvent event) throws IOException {
 
@@ -591,10 +627,8 @@ public class AnimeManagerGUI {
 
 		Parent showTrackingAnimePane = fxmlLoader.load();
 
-
-
-
 		mainPanel.setCenter(showTrackingAnimePane);
+		 initializeTableTrackingAnime();
 
 	}
 
@@ -649,14 +683,49 @@ public class AnimeManagerGUI {
 
 
 
-
 	@FXML
 	void sortbycurrentScore(ActionEvent event) {
+		
+		ObservableList <FollowingAnime> oblist;
+		if(sortIfCurrentScore.isSelected() == true) {
+			
+			sortIfCurrentEp.setDisable(true);
+			oblist = FXCollections.observableList(am.getAnimeCurrentScoreComparator());
+			 tvTrackingAnime.setItems(oblist);
+			
+			
+		}else {
+			
+			
+			sortIfCurrentEp.setDisable(false);
+			tvTrackingAnime.setItems(null);
+		}
+
 
 	}
 
 	@FXML
 	void sortByCurrentEp(ActionEvent event) {
+		
+		ObservableList <FollowingAnime> oblist;
+		if(sortIfCurrentEp.isSelected() == true) {
+			
+			sortIfCurrentScore.setDisable(true);
+			oblist = FXCollections.observableList(am.getAnimeListFiltredByCurrentEpisode());
+			 tvTrackingAnime.setItems(oblist);
+			
+			
+		}else {
+			
+			
+			sortIfCurrentScore.setDisable(false);
+			tvTrackingAnime.setItems(null);
+		}
+
+
+	
+		
+		
 
 	}
 
@@ -664,6 +733,28 @@ public class AnimeManagerGUI {
 
 	@FXML
 	void addAnimetoWatchList(ActionEvent event) {
+
+
+		String name = nametxt.getText();
+		String picture = picturetxt.getText();
+		String studios = studiostxt.getText();
+		String genres = genrestxt.getText();
+		String airtime = airtimetxt.getText();
+		int seasons = Integer.parseInt(seasonstxt.getText());
+		int episodes = Integer.parseInt(episodestxt.getText());
+		int currentEp = Integer.parseInt(currenteptxt.getText());
+		int currentSeason = Integer.parseInt(currentseasontxt.getText());
+		int currentScore = Integer.parseInt(currentscoretxt.getText());
+
+
+
+		FollowingAnime newFollowingAnime = new FollowingAnime(name,picture,studios,0,"Series",genres, episodes, airtime, seasons,currentEp,currentSeason, currentScore);
+
+
+
+		addNewAnime(newFollowingAnime);
+
+
 
 	}
 
@@ -784,8 +875,8 @@ public class AnimeManagerGUI {
 
 	}
 
-	//Comic Section
-	//All Comic Options 
+	//Comic Section**************************************************************************************
+	//All Comic Options ***********************************************************************************
 
 	@FXML
 	void manageComicList(ActionEvent event) throws IOException {
@@ -1055,8 +1146,8 @@ public class AnimeManagerGUI {
 
 	}
 
-	//Book Section
-	//All Book Options
+	//Book Section***************************************************************************************************************
+	//All Book Options***********************************************************************************************************
 
 
 	@FXML
