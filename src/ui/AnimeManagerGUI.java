@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import exceptions.AnimeNameAlreadyExistsException;
@@ -1439,6 +1440,17 @@ public class AnimeManagerGUI {
 
 
 	}
+	
+	   @FXML
+	    void exportData(ActionEvent event) {
+			try {
+	    		am.exportData();
+	    	}catch(FileNotFoundException fnfe) {
+	    		toExportDataAlert();
+	    	}
+	    }
+
+	    
 
 	//Book Section***************************************************************************************************************
 	//All Book Options***********************************************************************************************************
@@ -1477,6 +1489,13 @@ public class AnimeManagerGUI {
 		alert.setContentText("Es probable que aun no haya informacion guardada");
 		alert.showAndWait();
 	}
+	
+	 public void toExportDataAlert() {
+	    	Alert alert = new Alert(AlertType.ERROR);
+	    	alert.setHeaderText("No se ha encontrado el archivo");
+	    	alert.setContentText("La ruta no existe");
+	    	alert.showAndWait();
+	    }
 
 
 

@@ -15,6 +15,7 @@
             <Button layoutX="188.0" layoutY="64.0" mnemonicParsing="false" onAction="#manageComicList" prefHeight="38.0" prefWidth="224.0" text="manage MangaList" />
             <Button layoutX="188.0" layoutY="113.0" mnemonicParsing="false" onAction="#manageBookList" prefHeight="38.0" prefWidth="224.0" text="manage Light Novel List" />
             <Button layoutX="188.0" layoutY="159.0" mnemonicParsing="false" onAction="#manageQuizzes" prefHeight="38.0" prefWidth="224.0" text="manage Quizzes" />
+            <Button layoutX="188.0" layoutY="223.0" mnemonicParsing="false" onAction="#exportData" prefHeight="38.0" prefWidth="224.0" text="export Following Manga &amp; Anime list" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="mainMenuPane" layoutY="-1.0" prefHeight="107.0" prefWidth="600.0">

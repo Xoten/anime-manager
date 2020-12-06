@@ -24,7 +24,7 @@ public class AnimeManager {
 	public final static String SAVE_USERS = "data/Serializable/usersData.ap2";
 	public final static String SAVE_ANIMES = "data/Serializable/animesData.ap2";
 	public final static String SAVE_MANGAS = "data/Serializable/mangasData.ap2";
-	public final static String TO_EXPORT = "data/export/";
+	public final static String TO_EXPORT = "data/export/animeData.csv";
 	
 	
 	
@@ -565,7 +565,7 @@ public class AnimeManager {
 	
 	public void exportData() throws FileNotFoundException {
 		String separator = File.pathSeparator;
-		LinkedList<Anime> animesToExport = toComprobateIfAnimeisCompleted();
+		LinkedList<Anime> animesToExport = toRemoveAnimeFromWatchList();
 		ArrayList<Comic> comicsToExport = toRemoveComicFromReadList();
 	
 
