@@ -38,6 +38,11 @@ public class Comic {
 		return score;
 	}
 	
+	public void setScore(int s) {
+		
+		score = s;
+	}
+	
 	public String getName() {
 		
 		return name;

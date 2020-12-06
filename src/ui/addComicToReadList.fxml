@@ -33,7 +33,7 @@
             <CheckBox fx:id="mangaOp" layoutX="404.0" layoutY="33.0" mnemonicParsing="false" onAction="#addToReadListIfManga" text="Manga" />
             <CheckBox fx:id="manhwaOp" layoutX="403.0" layoutY="58.0" mnemonicParsing="false" onAction="#AddToReadListIfManhwa" text="Manhwa" />
             <Label layoutX="427.0" layoutY="12.0" text="Type" />
-            <Label fx:id="comiccolorized" layoutX="365.0" layoutY="210.0" prefHeight="17.0" prefWidth="71.0" text="Colorized" />
+            <Label fx:id="comiccolorized" layoutX="346.0" layoutY="210.0" prefHeight="17.0" prefWidth="90.0" text="¿is Colorized?" />
             <TextField fx:id="comicColorizedtxt" layoutX="463.0" layoutY="206.0" prefHeight="25.0" prefWidth="140.0" />
             <Label layoutX="48.0" layoutY="210.0" text="Image" />
             <TextField fx:id="TFComicImagetxt" layoutX="102.0" layoutY="206.0" />

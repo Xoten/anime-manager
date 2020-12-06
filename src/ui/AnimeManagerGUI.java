@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import exceptions.AnimeNameAlreadyExistsException;
+import exceptions.ComicNameAlreadyExistsException;
 import exceptions.NotTheSamePasswordException;
 import model.User;
 import javafx.collections.FXCollections;
@@ -28,7 +29,9 @@ import model.Anime;
 import model.AnimeManager;
 import model.AnimeMovie;
 import model.AnimeSeries;
+import model.Comic;
 import model.FollowingAnime;
+import model.FollowingManga;
 
 public class AnimeManagerGUI {
 
@@ -185,6 +188,8 @@ public class AnimeManagerGUI {
 	@FXML
 	private CheckBox seriesOp;
 	@FXML
+	private CheckBox sortFCIVol;
+	@FXML
 	private TableView<Anime> tvWatchedAnime;
 
 	@FXML
@@ -237,27 +242,44 @@ public class AnimeManagerGUI {
 	@FXML
 	private TableColumn<?, ?> tcReadedComicVolumes;
 
+	@FXML
+	private Label searchedcomiclabel;
 
 	@FXML
-	private TableView<?> tcFComic;
+	private Label ccurrentchapterlabel;
 
 	@FXML
-	private TableColumn<?, ?> tcFComicame;
+	private Label ccurrentscorelabel;
 
 	@FXML
-	private TableColumn<?, ?> tcFComicCScore;
+	private Label ccurrentvolumelabel;
 
 	@FXML
-	private TableColumn<?, ?> tcFComicCurrChap;
+	private Label ctotalchapterslabel;
+	@FXML
+	private Label searchedcomictypelabel;
+
 
 	@FXML
-	private TableColumn<?, ?> tcFComicType;
+	private TableView<FollowingManga> tcFComic;
 
 	@FXML
-	private TableColumn<?, ?> tcCurrentCVol;
+	private TableColumn<FollowingManga, String> tcFComicame;
 
 	@FXML
-	private TableColumn<?, ?> tcFComicChap;
+	private TableColumn<FollowingManga, Integer> tcFComicCScore;
+
+	@FXML
+	private TableColumn<FollowingManga, Integer> tcFComicCurrChap;
+
+	@FXML
+	private TableColumn<FollowingManga, String> tcFComicType;
+
+	@FXML
+	private TableColumn<FollowingManga, Integer> tcCurrentCVol;
+
+	@FXML
+	private TableColumn<FollowingManga, Integer> tcFComicChap;
 
 	@FXML
 	private TableView<?> tcReadedNovel;
@@ -662,7 +684,7 @@ public class AnimeManagerGUI {
 	@FXML
 	void searchAnime(ActionEvent event) {
 
-      
+
 		FollowingAnime animesearched = (FollowingAnime)am.searchAnime(searchanimetxt.getText());
 		System.out.println("anime searched: " +animesearched);
 		System.out.println(animesearched.getName()+animesearched.getType());
@@ -889,29 +911,29 @@ public class AnimeManagerGUI {
 	@FXML
 	void addWatchedAnime(ActionEvent event) {
 
-        
+
 		String name = watchedanimenametxt.getText();
 		String picture = watchedanimepicturetxt.getText();
 		String studios = watchedanimestudiostxt.getText();
 		String genres = watchedanimegenrestxt.getText();
 		int episodes = Integer.parseInt(watchedanimeeptxt.getText());
 		int score = Integer.parseInt(watchedanimescoretxt.getText());
-		
+
 		if(seriesOp.isSelected()) {
-			
+
 			int seasons = Integer.parseInt(watchedanimeseasonstxt.getText());
 			String airingtime = watchedanimeairtimetxt.getText();
-			
+
 			AnimeSeries as = new AnimeSeries(name, picture, studios,score, "Series", genres, episodes, airingtime, seasons);
 			addNewAnime(as);
-			
-			
+
+
 		}else {
-			
+
 			String release = watchedanimereleasetxt.getText();
 			AnimeMovie am = new AnimeMovie(name,picture, studios, score, "Anime Movie", genres, episodes, release);
 			addNewAnime(am);
-			
+
 		}
 
 	}
@@ -1000,8 +1022,51 @@ public class AnimeManagerGUI {
 
 	}
 
+	public void addNewComic(Comic comictoAdd) {
+		try {
+			am.addComicToComicList(comictoAdd);
+
+		}catch(ComicNameAlreadyExistsException al) {
+			addNewComic(comictoAdd);
+		}
+	}
+
+
 	@FXML
 	void AddComicToReadList(ActionEvent event) {
+		String name = comicnametxt.getText();
+		String author = comicauthortxt.getText();
+		String genres = comicgenrestxt.getText();
+		String image = TFComicImagetxt.getText();
+		int volumes =  Integer.parseInt(comicvolumestxt.getText());
+		int chapters = Integer.parseInt(comicchapterstxt.getText());
+		int currVol = Integer.parseInt(comiccurvoltxt.getText());
+		int currScore = Integer.parseInt(comiccurscoretxt.getText());
+		int currChapter = Integer.parseInt(comiccurrentchaptxt.getText());
+
+		if(mangaOp.isSelected() == true) {
+
+			String animeadaptname = comicAdaptxtxt.getText();
+			FollowingManga fmanga = new FollowingManga(name, "Manga", chapters, volumes, author, genres, image, 0 ,animeadaptname, currChapter, currScore, currVol);
+			addNewComic(fmanga);
+
+		}else {
+			FollowingManga fmanhwa;
+
+			if(comicColorizedtxt.getText().equalsIgnoreCase("yes")) {
+
+				fmanhwa = new FollowingManga(name, "Manhwa", chapters, volumes, author, genres, image, 0 , "doesn't apply, but its colorized", currChapter, currScore, currVol);
+				addNewComic(fmanhwa);
+
+			}else if(comicColorizedtxt.getText().equalsIgnoreCase("No")) {
+
+				fmanhwa = new FollowingManga(name, "Manhwa", chapters, volumes, author, genres, image, 0 , "doesn't apply,also is not colorized", currChapter, currScore, currVol);
+				addNewComic(fmanhwa);
+			}
+
+		}
+
+
 
 	}
 
@@ -1042,6 +1107,20 @@ public class AnimeManagerGUI {
 	@FXML
 	void searchComic(ActionEvent event) {
 
+
+
+		FollowingManga comicsearched = (FollowingManga)am.searchComic(searchComictxt.getText());
+		System.out.println("comic searched: " +comicsearched);
+		System.out.println(comicsearched.getName()+comicsearched.getType());
+		searchedcomiclabel.setText(comicsearched.getName());
+		searchedcomictypelabel.setText(comicsearched.getType());
+		ccurrentchapterlabel.setText(String.valueOf(comicsearched.getCurrentchap()));
+		ccurrentscorelabel.setText(String.valueOf(comicsearched.getCurrentscore()));
+		ccurrentvolumelabel.setText(String.valueOf(comicsearched.getCurrentvol()));
+		ctotalchapterslabel.setText(String.valueOf(comicsearched.getChapters()));
+
+
+
 	}
 
 
@@ -1062,14 +1141,46 @@ public class AnimeManagerGUI {
 	@FXML
 	void saveCurrComicVol(ActionEvent event) {
 
+		FollowingManga comicsearch = (FollowingManga)am.searchComic(searchComictxt.getText());
+
+		comicsearch.setCurrentvol(Integer.parseInt(modifyCurrComicVoltxt.getText()));
+
+
 	}
 
 	@FXML
 	void saveCurrentComicScore(ActionEvent event) {
 
+		FollowingManga comictosearch = (FollowingManga)am.searchComic(searchComictxt.getText());
+
+		comictosearch.setCurrentscore(Integer.parseInt(modifyCurrComicScoretxt.getText()));
+
+
 	}
 	@FXML
 	void saveCurrComicChap(ActionEvent event) {
+
+		FollowingManga comicToSearch = (FollowingManga)am.searchComic(searchComictxt.getText());
+
+		comicToSearch.setCurrentchap(Integer.parseInt(modifyCurrComicChaptxt.getText()));
+
+		if(Integer.parseInt(modifyCurrComicChaptxt.getText()) == comicToSearch.getChapters()) {
+
+			comicToSearch.setScore(Integer.parseInt(modifyCurrComicScoretxt.getText()));
+		}
+
+	}
+
+	public void initializeFollowedComics() {
+
+		tcFComicame.setCellValueFactory(new PropertyValueFactory<FollowingManga, String>("name"));
+		tcFComicCScore.setCellValueFactory(new PropertyValueFactory<FollowingManga, Integer>("currentscore"));
+		tcFComicCurrChap.setCellValueFactory(new PropertyValueFactory<FollowingManga, Integer>("currentchap"));
+		tcFComicType.setCellValueFactory(new PropertyValueFactory<FollowingManga, String>("type"));
+		tcCurrentCVol.setCellValueFactory(new PropertyValueFactory<FollowingManga, Integer>("currentvol"));
+		tcFComicChap.setCellValueFactory(new PropertyValueFactory<FollowingManga, Integer>("chapters"));
+
+
 
 	}
 
@@ -1086,6 +1197,7 @@ public class AnimeManagerGUI {
 
 
 		mainPanel.setCenter(showFollowedComicsScreen);
+		initializeFollowedComics();
 
 	}
 
@@ -1249,38 +1361,55 @@ public class AnimeManagerGUI {
 	@FXML
 	void sortFollowingComicbyVol(ActionEvent event) {
 
-	}
+		ObservableList <FollowingManga> obser;
+		if(sortFCIVol.isSelected() == true) {
 
-	//Book Section***************************************************************************************************************
-	//All Book Options***********************************************************************************************************
-
-
-	@FXML
-	void manageBookList(ActionEvent event) {
-		returnButton.setVisible(true);
-
-	}
-
-	@FXML
-	void sortReadedBookByVolumes(ActionEvent event) {
-
-	}
-
-	@FXML
-	void sortReadedBookbyName(ActionEvent event) {
-
-	}
+			
+			obser = FXCollections.observableList(am.getComicListFiltredByCurrentVolInsertion());
+			tcFComic.setItems(obser);
 
 
-	@FXML
-	void sortCrrNovelbyChap(ActionEvent event) {
+		}else {
 
-	}
 
-	@FXML
-	void sortCurrentnovelbyCrrVol(ActionEvent event) {
+		
+			tcFComic.setItems(null);
+		}
 
-	}
+
+
+}
+
+//Book Section***************************************************************************************************************
+//All Book Options***********************************************************************************************************
+
+
+@FXML
+void manageBookList(ActionEvent event) {
+	returnButton.setVisible(true);
+
+}
+
+@FXML
+void sortReadedBookByVolumes(ActionEvent event) {
+
+}
+
+@FXML
+void sortReadedBookbyName(ActionEvent event) {
+
+}
+
+
+@FXML
+void sortCrrNovelbyChap(ActionEvent event) {
+
+}
+
+@FXML
+void sortCurrentnovelbyCrrVol(ActionEvent event) {
+
+}
 
 
 

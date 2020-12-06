@@ -16,7 +16,6 @@ public class AnimeManager {
 	private LinkedList<User> users;
 	private LinkedList<Anime> animes;
 	private ArrayList<Comic> comics;
-	private ArrayList<Comic>  manhwas;
 	private ArrayList<Book> lnovels;
 	private ArrayList<Quizz> quizzes;
 
@@ -26,7 +25,6 @@ public class AnimeManager {
 		users = new LinkedList<>();
 		animes = new LinkedList<>();
 		comics = new ArrayList<>();
-		manhwas = new ArrayList<>();
 		lnovels = new ArrayList<>();
 		quizzes = new ArrayList<>();
 	}
@@ -332,7 +330,7 @@ public class AnimeManager {
 			comics.add(comicToAdd);
 		} else {
 			int c = 0;
-			while(c < comics.size() && comparatorAddComic(comicToAdd.getName(), (comics.get(c)).getName()) >= 1) {
+			while(c < comics.size() && comparatorAddComic(comicToAdd.getAuthor(), (comics.get(c)).getAuthor()) >= 1) {
 				c++;
 			}
 			comics.add(c, comicToAdd);
@@ -357,8 +355,84 @@ public class AnimeManager {
 		return comiclist;
 
 	}
+
+	public ArrayList<Comic> toComprobateIfComicisCompleted(){
+
+		ArrayList<Comic> comicslist = new ArrayList<>();
+
+		for(int i = 0; i< comics.size();i++) {
+
+
+			if(comics.get(i) instanceof FollowingManga && comics.get(i).getScore() != 0) {
+
+				comicslist.add(comics.get(i));
+
+			}else if(animes.get(i).getScore() != 0) {
+
+				comicslist.add(comics.get(i));		
+			}		
+		}
+
+		return comicslist;
+
+	}
 	
-	public ArrayList<FollowingManga> getComicListSortedByCurrentVolInsertion() {
+	public Comic searchComic(String comicAuthor) {
+		Comic comicToSearch = null;
+		boolean find = false;
+		int in = 0;
+		int fin = comics.size()-1;
+
+		while(in <= fin && !find) {
+			int pos = (int) Math.floor((in+fin)/2);
+			if(pos != comics.size()) {
+				String el = comics.get(pos).getAuthor();
+				int compar = comicAuthor.compareToIgnoreCase(el);
+				if(compar == 0) {
+					comicToSearch = comics.get(pos);
+					find = true;
+				} else if(compar < 0) {
+					fin = pos - 1;
+				} else if(compar > 0) {
+					in = pos + 1;
+				}
+			}
+		}
+		return comicToSearch;
+	}
+	
+	
+	
+	
+	//***SORT COMIC METHODS***************************************************//
+	
+	private int comparatorAddComic(String c1, String c2) {
+		return c1.compareToIgnoreCase(c2);
+	}
+	
+	public ArrayList<Comic> getComicListSortedByAuthorSelection() {
+		ArrayList<Comic> comiclist = new ArrayList<>();
+		Comic[] temporalL = toComprobateIfComicisCompleted().toArray(new Comic[toComprobateIfComicisCompleted().size()]);
+		for(int c = 0; c < temporalL.length - 1; c++ ) {
+			int menor= c;
+			int index = c;
+
+			for(int v = c+1; v < temporalL.length; v++) {
+				if(temporalL[v].getAuthor().compareToIgnoreCase(temporalL[menor].getAuthor()) > 0) {
+					menor=v;
+					index = v;
+				}
+			}
+			Comic temp = temporalL[c];
+			temporalL[c] = temporalL[menor];
+			temporalL[index] = temp;
+		}
+		for(int c = 0; c < temporalL.length; c++) {
+			comiclist.add(temporalL[c]);
+		}
+		return comiclist;
+	}
+	public ArrayList<FollowingManga> getComicListFiltredByCurrentVolInsertion() {
 		ArrayList<FollowingManga> comiclist = new ArrayList<>();
 		Comic[] temporaL = toRemoveComicFromReadList().toArray(new Comic[toRemoveComicFromReadList().size()]);
 		ArrayList<FollowingManga> temporaL2 = new ArrayList<>();
@@ -382,25 +456,37 @@ public class AnimeManager {
 		for(int c = 0; c < temporaL2.size(); c++) {
 			comiclist.add(temporaL2.get(c));
 		}
+		
+		
 		return comiclist;
 	}
 	
-	
-	//***SORT COMIC METHODS***************************************************//
-	
-	private int comparatorAddComic(String c1, String c2) {
-		return c1.compareToIgnoreCase(c2);
+	public ArrayList<Comic> getComicListSortedbyVolumesBubble() {
+		ArrayList<Comic> clist = new ArrayList<>();
+		Comic[] temporal = toComprobateIfComicisCompleted().toArray(new Comic[toComprobateIfComicisCompleted().size()]);
+		Comic temp = null;
+		for(int c = 0; c < temporal.length; c++) {
+			for(int v = 1; v < (temporal.length - c); v++) {
+				if(temporal[v-1].getVolumes() > temporal[v].getVolumes()) {  
+					//swap elements  
+					temp = temporal[v-1];  
+					temporal[v-1] = temporal[v];  
+					temporal[v] = temp;  
+				}
+			}
+		}
+		for(int c = 0; c < temporal.length; c++) {
+			clist.add(temporal[c]);
+		}
+		return clist;
 	}
+	
+
 
 	public ArrayList<Comic> getComics() {
 		return comics;
 	}
 
-
-
-	public ArrayList<Comic> getManhwas() {
-		return manhwas;
-	}
 
 	public ArrayList<Book> getLnovels() {
 		return lnovels;
