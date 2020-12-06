@@ -1,10 +1,13 @@
 package model;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,6 +24,8 @@ public class AnimeManager {
 	public final static String SAVE_USERS = "data/Serializable/usersData.ap2";
 	public final static String SAVE_ANIMES = "data/Serializable/animesData.ap2";
 	public final static String SAVE_MANGAS = "data/Serializable/mangasData.ap2";
+	public final static String TO_EXPORT = "data/export/";
+	
 	
 	
 	
@@ -212,8 +217,7 @@ public class AnimeManager {
 		Anime temp = null;
 		for(int c = 0; c < temporal.length; c++) {
 			for(int v = 1; v < (temporal.length - c); v++) {
-				if(temporal[v-1].getScore() > temporal[v].getScore()) {  
-					//swap elements  
+				if(temporal[v-1].getScore() > temporal[v].getScore()) {   
 					temp = temporal[v-1];  
 					temporal[v-1] = temporal[v];  
 					temporal[v] = temp;  
@@ -479,7 +483,6 @@ public class AnimeManager {
 		for(int c = 0; c < temporal.length; c++) {
 			for(int v = 1; v < (temporal.length - c); v++) {
 				if(temporal[v-1].getVolumes() > temporal[v].getVolumes()) {  
-					//swap elements  
 					temp = temporal[v-1];  
 					temporal[v-1] = temporal[v];  
 					temporal[v] = temp;  
@@ -558,6 +561,31 @@ public class AnimeManager {
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SAVE_MANGAS));
 		comics = (ArrayList<Comic>)ois.readObject();
 		ois.close();
+	}
+	
+	public void exportData() throws FileNotFoundException {
+		String separator = File.pathSeparator;
+		LinkedList<Anime> animesToExport = toComprobateIfAnimeisCompleted();
+		ArrayList<Comic> comicsToExport = toRemoveComicFromReadList();
+	
+
+		PrintWriter pw = new PrintWriter(TO_EXPORT);
+
+		pw.print("ANIMES ACTUALES EN SEGUIMIENTO\n");
+		pw.print("Nombre"+separator+"Generos"+separator+"Studios"+separator+"Temporadas"+separator+"Capitulo Actual"+separator+"Temporada actual"+separator+"total de capitulos"+separator+"\n");
+		for(int i = 0; i<animesToExport.size();i++) {
+			FollowingAnime current = (FollowingAnime)animesToExport.get(i);
+			pw.print(current.getName()+separator+current.getGenres()+separator+current.getStudios()+separator+current.getSeasons()+separator+current.getCurrentep()+separator+current.getCurrentseas()+separator+current.getEpisodes()+separator+"\n");
+		}
+
+		pw.print("\nCOMICS ACTUALES EN SEGUIMIENTO\n");
+		pw.print("Nombre"+separator+"Generos"+separator+"Autor"+separator+"Tipo"+separator+"calificacion actual"+separator+"capitulo actual"+separator+"volumen actual"+separator+""+separator+"total de volumenes"+separator+"\n");
+		for(int i = 0; i<comicsToExport.size();i++) {
+			FollowingManga current = (FollowingManga)comicsToExport.get(i);
+			pw.print(current.getName()+separator+current.getGenres()+separator+current.getAuthor()+separator+current.getType()+separator+current.getCurrentscore()+separator+current.getCurrentchap()+separator+current.getCurrentvol()+separator+current.getVolumes()+separator+"\n");
+		}
+		
+		pw.close();
 	}
 
 
