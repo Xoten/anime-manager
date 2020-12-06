@@ -27,7 +27,7 @@ public class Main extends Application{
 		fxmlLoader.setController(initialInterfaceGUI);
 		
 		Parent root = fxmlLoader.load();
-		initialInterfaceGUI.loadLogin();
+		initialInterfaceGUI.toLoadProgressFigure();
 		
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);

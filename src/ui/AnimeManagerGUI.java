@@ -8,6 +8,7 @@ import exceptions.AnimeNameAlreadyExistsException;
 import exceptions.ComicNameAlreadyExistsException;
 import exceptions.NotTheSamePasswordException;
 import model.User;
+import thread.ProgressLoadingThread;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import model.Anime;
 import model.AnimeManager;
@@ -33,6 +35,7 @@ import model.AnimeSeries;
 import model.Comic;
 import model.FollowingAnime;
 import model.FollowingManga;
+import model.Progressitem;
 
 public class AnimeManagerGUI {
 
@@ -90,6 +93,16 @@ public class AnimeManagerGUI {
 
 	@FXML
 	private Label totalEp;
+
+
+	@FXML
+	private Label percentprogresslabel;
+
+	@FXML
+	private Rectangle progressfigure;
+
+
+	private Progressitem pi;
 
 	@FXML
 	private TextField modifycurrentscoretxt;
@@ -410,6 +423,7 @@ public class AnimeManagerGUI {
 
 	public AnimeManagerGUI(AnimeManager amg){
 		am = amg;
+		pi = new Progressitem();
 		toSerializeAllInfo();
 
 	}
@@ -586,6 +600,34 @@ public class AnimeManagerGUI {
 		toLogin();
 	}
 
+
+	public void toLoadProgressFigure() throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("progressScreenWithThread.fxml"));
+
+		fxmlLoader.setController(this);
+
+		Parent progressPane = fxmlLoader.load();
+
+		mainPanel.getChildren().clear();
+		mainPanel.setCenter(progressPane); 	
+		pi.setLoading(true);
+		new ProgressLoadingThread(pi,this).start();
+
+
+	}
+
+	public void updateBar() {
+		percentprogresslabel.setText((pi.getNumberOfProgress()/3)+"%");
+		progressfigure.setWidth(pi.getNumberOfProgress());
+		if(pi.isLoading()==false) {
+			try {
+				loadLogin();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	//Anime Section*************************************************************************************************
 	//All Anime Options****************************************************************************************************
 
@@ -755,7 +797,7 @@ public class AnimeManagerGUI {
 		try {
 			am.saveDataAnimes();
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -768,11 +810,11 @@ public class AnimeManagerGUI {
 		FollowingAnime animesearch = (FollowingAnime)am.searchAnime(searchanimetxt.getText());
 
 		animesearch.setCurrentscore(Integer.parseInt(modifycurrentscoretxt.getText()));
-		
+
 		try {
 			am.saveDataAnimes();
 		} catch (IOException e) {
-			
+
 		}
 
 	}
@@ -1206,7 +1248,7 @@ public class AnimeManagerGUI {
 		try {
 			am.saveDataComics();
 		} catch (IOException e) {
-		
+
 			e.printStackTrace();
 		}
 
@@ -1222,11 +1264,11 @@ public class AnimeManagerGUI {
 
 			comicToSearch.setScore(Integer.parseInt(modifyCurrComicScoretxt.getText()));
 		}
-		
+
 		try {
 			am.saveDataComics();
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -1440,17 +1482,17 @@ public class AnimeManagerGUI {
 
 
 	}
-	
-	   @FXML
-	    void exportData(ActionEvent event) {
-			try {
-	    		am.exportData();
-	    	}catch(FileNotFoundException fnfe) {
-	    		toExportDataAlert();
-	    	}
-	    }
 
-	    
+	@FXML
+	void exportData(ActionEvent event) {
+		try {
+			am.exportData();
+		}catch(FileNotFoundException fnfe) {
+			toExportDataAlert();
+		}
+	}
+
+
 
 	//Book Section***************************************************************************************************************
 	//All Book Options***********************************************************************************************************
@@ -1489,13 +1531,13 @@ public class AnimeManagerGUI {
 		alert.setContentText("Es probable que aun no haya informacion guardada");
 		alert.showAndWait();
 	}
-	
-	 public void toExportDataAlert() {
-	    	Alert alert = new Alert(AlertType.ERROR);
-	    	alert.setHeaderText("No se ha encontrado el archivo");
-	    	alert.setContentText("La ruta no existe");
-	    	alert.showAndWait();
-	    }
+
+	public void toExportDataAlert() {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setHeaderText("No se ha encontrado el archivo");
+		alert.setContentText("La ruta no existe");
+		alert.showAndWait();
+	}
 
 
 
