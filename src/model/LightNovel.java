@@ -2,6 +2,10 @@ package model;
 
 public class LightNovel  extends Book{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean adaptation;
 	private String adaptationN;
 

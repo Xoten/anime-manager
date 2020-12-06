@@ -409,8 +409,29 @@ public class AnimeManagerGUI {
 
 	public AnimeManagerGUI(AnimeManager amg){
 		am = amg;
+		toSerializeAllInfo();
 
 	}
+
+	public void toSerializeAllInfo(){
+		try {
+			am.loadDataAnimes();
+		}catch(IOException | ClassNotFoundException abcda) {
+			notifySerializationAlert();
+		}
+
+		try {
+			am.loadDataUsers();
+		}catch(IOException | ClassNotFoundException abcde) {
+			notifySerializationAlert();
+		}
+		try {
+			am.loadDataComics();
+		}catch(IOException | ClassNotFoundException abcds) {
+			notifySerializationAlert();
+		}
+	}
+
 
 
 	public void loadLogin() throws IOException {
@@ -468,6 +489,7 @@ public class AnimeManagerGUI {
 			am.toAddNewUser(username, passwordVerify,pathPicture );
 			am.toVerifyPassword(password, passwordVerify);
 			toCleanRegister();
+			am.saveDataUsers();
 			newUserAlert(username, 1);
 			loadLogin();
 
@@ -583,9 +605,13 @@ public class AnimeManagerGUI {
 	public void addNewAnime(Anime animetoAdd) {
 		try {
 			am.addAnimeToAnimeList(animetoAdd);
+			am.saveDataAnimes();
 
 		}catch(AnimeNameAlreadyExistsException al) {
 			addNewAnime(animetoAdd);
+		} catch (IOException e) {
+
+			e.printStackTrace();
 		}
 	}
 
@@ -725,6 +751,12 @@ public class AnimeManagerGUI {
 
 			animesearch.setScore(Integer.parseInt(modifycurrentscoretxt.getText()));
 		}
+		try {
+			am.saveDataAnimes();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 
 
 	}
@@ -735,6 +767,12 @@ public class AnimeManagerGUI {
 		FollowingAnime animesearch = (FollowingAnime)am.searchAnime(searchanimetxt.getText());
 
 		animesearch.setCurrentscore(Integer.parseInt(modifycurrentscoretxt.getText()));
+		
+		try {
+			am.saveDataAnimes();
+		} catch (IOException e) {
+			
+		}
 
 	}
 
@@ -1025,9 +1063,13 @@ public class AnimeManagerGUI {
 	public void addNewComic(Comic comictoAdd) {
 		try {
 			am.addComicToComicList(comictoAdd);
+			am.saveDataComics();
 
 		}catch(ComicNameAlreadyExistsException al) {
 			addNewComic(comictoAdd);
+		} catch (IOException e) {
+
+			e.printStackTrace();
 		}
 	}
 
@@ -1144,6 +1186,12 @@ public class AnimeManagerGUI {
 		FollowingManga comicsearch = (FollowingManga)am.searchComic(searchComictxt.getText());
 
 		comicsearch.setCurrentvol(Integer.parseInt(modifyCurrComicVoltxt.getText()));
+		try {
+			am.saveDataComics();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
 
 
 	}
@@ -1154,7 +1202,12 @@ public class AnimeManagerGUI {
 		FollowingManga comictosearch = (FollowingManga)am.searchComic(searchComictxt.getText());
 
 		comictosearch.setCurrentscore(Integer.parseInt(modifyCurrComicScoretxt.getText()));
-
+		try {
+			am.saveDataComics();
+		} catch (IOException e) {
+		
+			e.printStackTrace();
+		}
 
 	}
 	@FXML
@@ -1167,6 +1220,13 @@ public class AnimeManagerGUI {
 		if(Integer.parseInt(modifyCurrComicChaptxt.getText()) == comicToSearch.getChapters()) {
 
 			comicToSearch.setScore(Integer.parseInt(modifyCurrComicScoretxt.getText()));
+		}
+		
+		try {
+			am.saveDataComics();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
 		}
 
 	}
@@ -1364,7 +1424,7 @@ public class AnimeManagerGUI {
 		ObservableList <FollowingManga> obser;
 		if(sortFCIVol.isSelected() == true) {
 
-			
+
 			obser = FXCollections.observableList(am.getComicListFiltredByCurrentVolInsertion());
 			tcFComic.setItems(obser);
 
@@ -1372,44 +1432,51 @@ public class AnimeManagerGUI {
 		}else {
 
 
-		
+
 			tcFComic.setItems(null);
 		}
 
 
 
-}
+	}
 
-//Book Section***************************************************************************************************************
-//All Book Options***********************************************************************************************************
-
-
-@FXML
-void manageBookList(ActionEvent event) {
-	returnButton.setVisible(true);
-
-}
-
-@FXML
-void sortReadedBookByVolumes(ActionEvent event) {
-
-}
-
-@FXML
-void sortReadedBookbyName(ActionEvent event) {
-
-}
+	//Book Section***************************************************************************************************************
+	//All Book Options***********************************************************************************************************
 
 
-@FXML
-void sortCrrNovelbyChap(ActionEvent event) {
+	@FXML
+	void manageBookList(ActionEvent event) {
+		returnButton.setVisible(true);
 
-}
+	}
 
-@FXML
-void sortCurrentnovelbyCrrVol(ActionEvent event) {
+	@FXML
+	void sortReadedBookByVolumes(ActionEvent event) {
 
-}
+	}
+
+	@FXML
+	void sortReadedBookbyName(ActionEvent event) {
+
+	}
+
+
+	@FXML
+	void sortCrrNovelbyChap(ActionEvent event) {
+
+	}
+
+	@FXML
+	void sortCurrentnovelbyCrrVol(ActionEvent event) {
+
+	}
+
+	public void notifySerializationAlert() {
+		Alert alert= new Alert(AlertType.ERROR);
+		alert.setHeaderText("No se pudo cargar la informacion");
+		alert.setContentText("Es probable que aun no haya informacion guardada");
+		alert.showAndWait();
+	}
 
 
 

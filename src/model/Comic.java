@@ -1,7 +1,13 @@
 package model;
 
-public class Comic {
+import java.io.Serializable;
 
+public class Comic implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int chapters;
 	private int volumes;
 	private String author;

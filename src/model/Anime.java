@@ -1,8 +1,14 @@
 package model;
 
-public class Anime {
+import java.io.Serializable;
 
-    private String name;
+public class Anime implements Serializable {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String name;
 	private String picture;
 	private String studios;
 	private int score;

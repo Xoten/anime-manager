@@ -3,6 +3,10 @@ package model;
 public class FollowingLightNovel extends LightNovel{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int currentchap;
 	private int currentvol;
 	private int currentscore;

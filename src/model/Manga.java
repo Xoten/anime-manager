@@ -3,6 +3,12 @@ package model;
 public class Manga extends Comic {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	private Boolean animeAdaptation;
 	
 

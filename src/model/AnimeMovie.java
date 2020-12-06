@@ -2,6 +2,10 @@ package model;
 
 public class AnimeMovie extends Anime {
       
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String release;
 	
 	

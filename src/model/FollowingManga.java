@@ -2,7 +2,11 @@ package model;
 
 public class FollowingManga extends Manga {
 
-	 private int currentchap;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int currentchap;
 	 private int currentscore;
 	 private int currentvol;
 	

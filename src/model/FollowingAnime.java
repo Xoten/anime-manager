@@ -2,6 +2,10 @@ package model;
 
 public class FollowingAnime extends AnimeSeries {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int currentep;
 	private int currentseas;
 	private int currentscore;

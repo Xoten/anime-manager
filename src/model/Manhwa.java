@@ -2,6 +2,10 @@ package model;
 
 public class Manhwa extends Comic{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean colorized;
 	
 	

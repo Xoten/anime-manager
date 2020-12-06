@@ -1,5 +1,10 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +18,12 @@ import exceptions.NotTheSamePasswordException;
 
 public class AnimeManager {
 
+	public final static String SAVE_USERS = "data/Serializable/usersData.ap2";
+	public final static String SAVE_ANIMES = "data/Serializable/animesData.ap2";
+	public final static String SAVE_MANGAS = "data/Serializable/mangasData.ap2";
+	
+	
+	
 	private LinkedList<User> users;
 	private LinkedList<Anime> animes;
 	private ArrayList<Comic> comics;
@@ -510,6 +521,45 @@ public class AnimeManager {
 	public LinkedList<Anime> getAnimes() {
 		return animes;
 	}
+	
+	public void saveDataAnimes() throws IOException {
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_ANIMES));
+		oos.writeObject(animes);
+		oos.close();
+	}
+	
+	public void saveDataUsers() throws IOException {
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_USERS));
+		oos.writeObject(users);
+		oos.close();
+	}
+	public void saveDataComics() throws IOException {
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_MANGAS));
+		oos.writeObject(comics);
+		oos.close();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void loadDataUsers() throws ClassNotFoundException, IOException {
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SAVE_USERS));
+		users = (LinkedList<User>)ois.readObject();
+		ois.close();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void loadDataAnimes() throws IOException, ClassNotFoundException{	
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SAVE_ANIMES));
+		animes = (LinkedList<Anime>)ois.readObject();
+		ois.close();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void loadDataComics() throws IOException, ClassNotFoundException{	
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SAVE_MANGAS));
+		comics = (ArrayList<Comic>)ois.readObject();
+		ois.close();
+	}
+
 
 
 }

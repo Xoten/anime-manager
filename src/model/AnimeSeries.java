@@ -3,6 +3,10 @@ package model;
 public class AnimeSeries extends Anime {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String airingtime;
 	private int seasons;
 	
